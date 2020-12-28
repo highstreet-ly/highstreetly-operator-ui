@@ -1,0 +1,57 @@
+name: Build the docker image for test
+
+on:
+  push:
+    tags:
+      - v1.* 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: docker registry credentials
+      env:
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: sonatribe
+      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - run: npm install -g ember-cli
+    - run: npm install
+    - id: get_version
+      uses: battila7/get-version-action@v2
+    - run: echo ${{ steps.get_version.outputs.version }}
+    
+    - run: ember build production --env=production
+      env:
+        CI: true
+        A_RECORD: sonashop
+        DASH_API: https://api.operator.sonashop.xyz
+        DASH_UI: https://operator.sonashop.xyz
+        DOMAIN=: sonashop.xyz
+        IDS: https://ids.sonashop.xyz
+        MAIN_API: https://api.sonashop.xyz
+        MAIN_UI: https://sonashop.xyz
+        NAMESPACE: sonashop-xyz
+        ORDERS_API: https://api.orders.sonashop.xyz
+        ORDERS_UI: https://orders.sonashop.xyz
+        TICKETS_API: https://api.shop.sonashop.xyz
+        TICKETS_UI: https://shop.sonashop.xyz
+        TLD: xyz
+        WIDGET_API: https://api.widget.sonashop.xyz
+        VERSION: ${{ steps.get_version.outputs.version }}
+        STRIPE_CLIENT_ID: ca_BZCgKyvK7Ywug3UOghG5VHADqYbNRTz9
+    
+    - name: Build the Docker image sonatribe/highstreet-operator-test
+      run: docker build -t sonatribe/highstreet-operator-test:${{ steps.get_version.outputs.version }} .
+    - name: push sonatribe/highstreet-operator-test
+      run: docker push sonatribe/highstreet-operator-test:${{ steps.get_version.outputs.version }}
+      
