@@ -3,7 +3,7 @@ name: Build the docker image for wayne
 on:
   push:
     tags:
-      - v1.* 
+      - v* 
 
 jobs:
   build:

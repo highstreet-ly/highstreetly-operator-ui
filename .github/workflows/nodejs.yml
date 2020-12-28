@@ -1,4 +1,4 @@
-name: Build and deploy dash.
+name: Build and deploy operator.
 on:
   push:
     branches:
