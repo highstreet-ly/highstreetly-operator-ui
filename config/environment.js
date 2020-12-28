@@ -4,6 +4,7 @@ module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'highstreetly-operator-ui',
     environment,
+    podModulePrefix: 'highstreetly-operator-ui/pods',
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
@@ -22,6 +23,46 @@ module.exports = function(environment) {
       // when it is created
     }
   };
+
+  ENV.sonatribe = {};
+
+  ENV.sonatribe.Api = process.env.MAIN_API;
+
+  ENV.sonatribe.DashApi = process.env.DASH_API;
+  ENV.sonatribe.DashUi = process.env.DASH_UI;
+
+  ENV.sonatribe.authenticationURL = `https://ids.${process.env.A_RECORD}.${process.env.TLD}`;
+
+
+  ENV.sonatribe.AllowedDomains = `api.dashboard.${process.env.A_RECORD}.${process.env.TLD},ids.${process.env.A_RECORD}.${process.env.TLD}`;
+
+  ENV.sonatribe.MainUi = process.env.MAIN_UI;
+  ENV.sonatribe.Version = process.env.VERSION;
+  ENV.sonatribe.Client = process.env.CLIENT;
+  ENV.sonatribe.responseType = process.env.RESPONSE_TYPE;
+  ENV.sonatribe.stripeClientId = process.env.STRIPE_CLIENT_ID;
+  ENV.sonatribe.partnerId = process.env.PARTNER_ID;
+  ENV.sonatribe.apiNamespace = process.env.API_NAMEPSACE;
+  ENV.sonatribe.ClientSilentRenew = process.env.CLIENT_SILENT_RENEW;
+  ENV.sonatribe.ImageBlobContainer = process.env.IMAGE_BLOB_CONTAINER;
+  ENV.sonatribe.applicationURL = process.env.CLIENT;
+  ENV.sonatribe.requestedScopes = process.env.SCOPE;
+  ENV.sonatribe.applicationName = process.env.APPLICATION_NAME;
+  ENV.sonatribe.popupRedirectURL = process.env.CLIENT_POPUP;
+  ENV.sonatribe.silentRedirectURL = process.env.SILENT_REDIRECT_URL;
+  ENV.sonatribe.responseType = process.env.RESPONSE_TYPE;
+  ENV.sonatribe.postLogoutRedirectURL = process.env.POST_LOGOUT_URL;
+  ENV.sonatribe.checkSessionInterval = +process.env.CHECK_SESSION_INTERVAL;
+  ENV.sonatribe.automaticSilentRenew = (process.env.AUTOMATIC_SILENT_RENEW == 'true');
+  ENV.sonatribe.filterProtocolClaims = (process.env.FILTER_PROTOCOL_CLAIMS == 'true');
+  ENV.sonatribe.loadUserInfo = (process.env.LOAD_USER_INFO == 'true');
+  ENV.sonatribe.clientId = process.env.CLIENT_ID;
+  ENV.sonatribe.redirectUrl ='';
+  ENV.sonatribe.clientDomain = process.env.CLIENT_DOMAIN;
+  ENV.sonatribe.serverIp = process.env.SERVER_IP;
+
+  ENV.sonatribe.OrdersUi = process.env.ORDERS_UI;
+  ENV.sonatribe.TicketsUi = process.env.TICKETS_UI;
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
