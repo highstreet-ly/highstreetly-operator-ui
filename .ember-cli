@@ -5,5 +5,10 @@
 
     Setting `disableAnalytics` to true will prevent any data from being sent.
   */
-  "disableAnalytics": false
+  "disableAnalytics": false,
+  "usePods": true,
+  "port": 4204,
+  "ssl": true,
+  "ssl-key": "ssl/server.key",
+  "ssl-cert": "ssl/server.crt"
 }
