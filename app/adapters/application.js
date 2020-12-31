@@ -5,9 +5,11 @@ import { inject as service } from '@ember/service'
 
 export default DS.JSONAPIAdapter.extend({
   session: service(),
-  host: Env.sonatribe.DashApi,
+  host: Env.sonatribe.OpsApi,
   namespace: Env.sonatribe.apiNamespace,
   headers: computed('session.session.authenticated.access_token', function () {
+
+
     let token = this.get('session.session.authenticated.access_token');
     let headers = {
       Authorization: `Bearer ${token}`,

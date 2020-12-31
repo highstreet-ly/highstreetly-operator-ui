@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        {{#if this.title}}
+          <h4 class="card-title">{{this.title}}</h4>
+        {{/if}}
+         <div class="input-group mt-12 mb-12">
+          {{input value=search classNames=(concat "form-control input-lg" inputClasses)  key-up=(action "doSearch" search) insert-newline=(action "doSearch" search)}}
+          <span class="input-group-prepend">
+            <span class="input-group-text" {{action "doSearch" search}}>{{fa-icon "search"}}</span>
+          </span>
+        </div> 
+
+        {{log @operatorServices}}
+
+        {{#if loading}}
+        <ComponentLoading />
+        {{else}}
+
+           <ul id="services-list" class="list-unstyled event-panel-list mt-3">
+            {{#each @operatorServices as |event|}}
+              <li class="clear">
+                <span class="event-panel-text">
+                  <b>{{event.name}}</b>
+                </span>
+                <small class="event-panel-buttons text-right">
+                  {{#if (eq modelType "event-instance")}}
+                    {{#if event.isPublished}}
+                      <a href="https://{{event.url}}" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-fw btn-xs">{{fa-icon "share"}} View</a>
+                    {{/if}}
+                  {{/if}}
+
+                  {{#if event.isPublished}}
+                    <span {{action "unpublishEvent" event}} class="btn btn-outline-danger btn-fw btn-xs">{{fa-icon 'times'}} Disable Shop</span>
+                  {{else}}
+                    <span {{action "publishEvent" event}} class="btn btn-outline-success btn-fw btn-xs">{{fa-icon 'check'}} Enable Shop</span>
+                  {{/if}}
+
+                  {{#if (eq modelType "event-series")}}
+                    {{#if (gt event.eventCount 1)}}
+                      <span name="manage" {{action "navigateSeries" event}} class="btn btn-info btn-fw btn-xs">{{fa-icon 'pencil'}} Manage</span>
+                    {{else}}
+                      <span name="manage" {{action "navigateFirstInstanceInSeries" event}} class="btn btn-info btn-fw btn-xs">{{fa-icon 'pencil'}} Manage</span>
+                    {{/if}}
+                  {{else}}
+                    <span name="manage" {{action "navigateInstance" event}} class="btn btn-info btn-fw btn-xs">{{fa-icon 'pencil'}} Manage</span>
+                  {{/if}}
+                </small>
+              </li>
+            {{/each}}
+          </ul> 
+
+        
+        {{/if}}
+        {{!-- {{simple-pagination recordCount=recordCount pageSize=pageSize pageNumber=pageNumber onPageSelect=(action "getPage")}} --}}
+      </div>
+    </div>
+  </div>
+</div>

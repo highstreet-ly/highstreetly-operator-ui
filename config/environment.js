@@ -29,12 +29,13 @@ module.exports = function(environment) {
   ENV.sonatribe.Api = process.env.MAIN_API;
 
   ENV.sonatribe.DashApi = process.env.DASH_API;
+  ENV.sonatribe.OpsApi = process.env.OPS_API;
   ENV.sonatribe.DashUi = process.env.DASH_UI;
 
   ENV.sonatribe.authenticationURL = `https://ids.${process.env.A_RECORD}.${process.env.TLD}`;
 
 
-  ENV.sonatribe.AllowedDomains = `api.dashboard.${process.env.A_RECORD}.${process.env.TLD},ids.${process.env.A_RECORD}.${process.env.TLD}`;
+  ENV.sonatribe.AllowedDomains = `api.ops.${process.env.A_RECORD}.${process.env.TLD},ids.${process.env.A_RECORD}.${process.env.TLD}`;
 
   ENV.sonatribe.MainUi = process.env.MAIN_UI;
   ENV.sonatribe.Version = process.env.VERSION;
