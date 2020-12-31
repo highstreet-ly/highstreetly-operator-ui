@@ -5,12 +5,12 @@ export default class IndexRoute extends Route {
     @service
     session
 
-    redirect(){
-        if (!this.session.isAuthenticated) {
-            this.transitionTo('login');
-        } else {
+    // redirect(){
+    //     if (!this.session.isAuthenticated) {
+    //         this.transitionTo('login');
+    //     } else {
             
-            this.transitionTo('u.index');
-        }
-    }
+    //         this.transitionTo('u.index');
+    //     }
+    // }
 }

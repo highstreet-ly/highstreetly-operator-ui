@@ -16,8 +16,6 @@ export default class LoginController extends Controller {
 
     @action
     async login() {
-
-
         try {
             await this.ajax.request('/account/login', {
                 method: 'POST',
