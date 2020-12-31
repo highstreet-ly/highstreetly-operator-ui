@@ -3,15 +3,15 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 
-// const exec = require('child_process').exec;
-// exec('sh ssl/get-certs.sh',
-//   (error, stdout, stderr) => {
-//     console.log(stdout);
-//     console.log(stderr);
-//     if (error !== null) {
-//       console.log(`exec error: ${error}`);
-//     }
-//   });
+const exec = require('child_process').exec;
+exec('sh ssl/get-certs.sh',
+  (error, stdout, stderr) => {
+    console.log(stdout);
+    console.log(stderr);
+    if (error !== null) {
+      console.log(`exec error: ${error}`);
+    }
+  });
 
 
 
