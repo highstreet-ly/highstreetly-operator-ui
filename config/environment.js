@@ -18,6 +18,11 @@ module.exports = function(environment) {
       }
     },
 
+    cloudinary: {
+      cloudName: 'sonatribedevmou',
+      apiKey: '967363294944649'
+    },
+
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created

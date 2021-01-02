@@ -18,7 +18,7 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin) {
         return {
             eventSeries: eventSeries,
             operatorServices: await this.store.query("event-instance", {
-                fields: 'name,slug,start-date,end-date,is-published',
+                fields: 'name,slug,start-date,end-date,main-image-id,is-published',
                 page: {
                     'size': 5,
                     'number': 1

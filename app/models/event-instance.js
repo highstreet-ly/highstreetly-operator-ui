@@ -5,6 +5,12 @@ export default class EventInstanceModel extends Model {
   @attr('string')
   name;
 
+  @attr('string')
+  slug;
+
+  @attr('string')
+  mainImageId;
+
   @attr('boolean')
   isPublished;
 }

@@ -11,7 +11,8 @@ Router.map(function() {
   this.route('callback');
   this.route('u', function() {
     this.route('orders', function() {
-      this.route('order', { path:':id' });
+      this.route('index', { path:':event-instance-id' })
+      this.route('order', { path:'order/:order-id' });
     });
   });
 });

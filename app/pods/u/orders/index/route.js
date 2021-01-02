@@ -1,4 +1,7 @@
 import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
 
-export default class UOrdersIndexRoute extends Route {
+@classic
+export default class OrdersIndexRoute extends Route {
+
 }
