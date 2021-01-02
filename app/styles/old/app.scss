@@ -1,16 +1,16 @@
-@import "variables"; // old
-@import "vars"; // new
-@import './vendor/justdo/horizontal';
+@import "old/variables"; // old
+@import "old/vars"; // new
+@import 'vendor/justdo/horizontal';
 /* @import './vendor/justdo/horizontal-dark'; */
-@import './color-scheme/dark';
+@import 'color-schemeark';
 
 
 /* components */
-@import 'components/buttons';
+@import 'old/components/buttons';
 
-@import "wayne";
-@import "temp";
-@import "pagination";
+@import "old/wayne";
+@import "old/temp";
+@import "old/pagination";
 
 .horizontal-menu .top-navbar .navbar-brand-wrapper .navbar-brand img {
   height: 60px;
