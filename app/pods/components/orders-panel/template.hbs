@@ -1,0 +1,62 @@
+{{#if orders.length}}
+  {{#each orders as |order|}}
+
+    <LinkTo @route="u.orders.order" @model={{order.id}} class="mb-4 flex px-4 py-4 justify-between bg-white shadow-xl rounded-lg">
+      <!-- Card -->
+      <span class="flex justify-between">
+        <span class="ml-4 flex flex-col text-gray-600
+          dark:text-gray-400">
+          <span>Status</span>
+          <span class="mt-2 text-black dark:text-gray-200">
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-800">
+              {{order.statusText}}
+            </span>
+          </span>
+        </span>
+
+        <span class="ml-12 flex flex-col text-gray-600
+          dark:text-gray-400">
+          <span>Order</span>
+          <span class="mt-2 text-black dark:text-gray-200">
+
+          </span>
+
+        </span>
+
+      </span>
+
+      <span class="flex">
+        <!-- Rigt side -->
+
+        <span class="mr-16 flex flex-col text-gray-600
+          dark:text-gray-400">
+          <span>Order #</span>
+          <span class="mt-2 text-black dark:text-gray-200">
+            {{order.humanReadableId}}
+          </span>
+        </span>
+
+        <span class="mr-16 flex flex-col text-gray-600
+          dark:text-gray-400">
+          <span>Price</span>
+          <span class="mt-2 text-black dark:text-gray-200">
+            £{{order.totalAmountFormatted}}
+          </span>
+        </span>
+
+        <span class="mr-8 flex flex-col text-gray-600
+          dark:text-gray-400">
+          <span>Type</span>
+          <span class="mt-2 text-black dark:text-gray-200">
+              {{order.typeText}}
+          </span>
+        </span>
+
+      </span>
+
+    </LinkTo>
+
+  {{/each}}
+{{/if}}
+
+{{yield}}

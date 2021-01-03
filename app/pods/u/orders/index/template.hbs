@@ -1,3 +1,17 @@
+{{#each this.orders as |order|}}
+  {{log order}}
+{{/each}}
 
+<div class="p-5 h-screen bg-gray-200">
+
+  <OrdersPanel
+      @query={{this.orderQuery}}
+      @eventInstance={{this.eventInstance}}
+      @title="Orders"
+      @commandType="order-confirmed,order-processing,order-refunded"
+      @backRoute="index"
+  />
+
+</div>
 
 {{outlet}}

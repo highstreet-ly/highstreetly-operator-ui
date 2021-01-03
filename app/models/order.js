@@ -1,5 +1,5 @@
 import Model from '@ember-data/model';
-import attr from 'ember-data/attr';
+import { attr } from '@ember-data/model';
 
 export default class OrderModel extends Model {
   @attr('string')
@@ -82,4 +82,19 @@ export default class OrderModel extends Model {
   @attr('string')
   customerDispatchAdvisory;
 
+  get totalAmountFormatted() {
+    return this.totalAmount.toFixed(2);
+  }
+
+  get typeText() {
+    if (this.isClickAndCollect) {
+      return 'Click and collect';
+    } else if (this.isLocalDelivery) {
+      return 'Local delivery';
+    } else if (this.isNationalDelivery) {
+      return 'National delivery'
+    } else {
+      return 'Unknown';
+    }
+  }
 }
