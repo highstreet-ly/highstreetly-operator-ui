@@ -3,7 +3,7 @@ name: Build the docker image for live
 on:
   push:
     tags:
-      - v* 
+      - v*
 
 jobs:
   build:
@@ -24,12 +24,12 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         DOCKER_USERNAME: sonatribe
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-    - run: npm install -g ember-cli
+    - run: npm install -g ember-cli tailwindcss
     - run: npm install
     - id: get_version
       uses: battila7/get-version-action@v2
     - run: echo ${{ steps.get_version.outputs.version }}
-    
+
     - run: ember build production --env=production
       env:
         CI: true
@@ -49,10 +49,10 @@ jobs:
         WIDGET_API: https://api.widget.highstreet.ly
         VERSION: ${{ steps.get_version.outputs.version }}
         STRIPE_CLIENT_ID: ca_BZCgZcukzBPBndf075LUCSQccEEF9q24
-    
+
     - name: Build the Docker image sonatribe/highstreet-operator-live
       run: docker build -t sonatribe/highstreet-operator-live:${{ steps.get_version.outputs.version }} .
     - name: push sonatribe/highstreet-operator-live
       run: docker push sonatribe/highstreet-operator-live:${{ steps.get_version.outputs.version }}
 
-      
+
