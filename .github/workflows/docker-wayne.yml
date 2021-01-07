@@ -36,7 +36,7 @@ jobs:
         A_RECORD: highstreetly
         DASH_API: https://api.operator.highstreetly.link
         DASH_UI: https://operator.highstreetly.link
-        DOMAIN=: highstreetly.link
+        DOMAIN: highstreetly.link
         IDS: https://ids.highstreetly.link
         MAIN_API: https://api.highstreetly.link
         MAIN_UI: https://highstreetly.link

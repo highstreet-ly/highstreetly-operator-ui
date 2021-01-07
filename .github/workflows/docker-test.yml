@@ -35,9 +35,10 @@ jobs:
         CI: true
         A_RECORD: sonashop
         DASH_API: https://api.dashboard.sonashop.xyz
-        OPS_API: https://api.ops.sonashop.xyz
         DASH_UI: https://dashboard.sonashop.xyz
-        DOMAIN=: sonashop.xyz
+        OPS_API: https://api.ops.sonashop.xyz
+        OPS_UI: https://ops.sonashop.xyz
+        DOMAIN: sonashop.xyz
         IDS: https://ids.sonashop.xyz
         MAIN_API: https://api.sonashop.xyz
         MAIN_UI: https://sonashop.xyz

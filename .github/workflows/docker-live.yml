@@ -34,9 +34,11 @@ jobs:
       env:
         CI: true
         A_RECORD: highstreet
-        DASH_API: https://api.operator.highstreet.ly
-        DASH_UI: https://operator.highstreet.ly
-        DOMAIN=: highstreet.ly
+        DASH_API: https://api.dashboard.highstreet.ly
+        OPS_API: https://api.ops.highstreet.ly
+        OPS_UI: https://ops.highstreet.ly
+        DASH_UI: https://dashboard.highstreet.ly
+        DOMAIN: highstreet.ly
         IDS: https://ids.highstreet.ly
         MAIN_API: https://api.highstreet.ly
         MAIN_UI: https://highstreet.ly

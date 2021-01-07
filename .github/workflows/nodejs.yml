@@ -27,7 +27,7 @@ jobs:
         A_RECORD: highstreet
         DASH_API: https://api.operator.highstreet.ly
         DASH_UI: https://operator.highstreet.ly
-        DOMAIN=: highstreet.ly
+        DOMAIN: highstreet.ly
         MAIN_API: https://api.highstreet.ly
         MAIN_UI: https://highstreet.ly
         NAMESPACE: highstreet-ly
