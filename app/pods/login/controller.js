@@ -14,8 +14,6 @@ export default class LoginController extends Controller {
     password = null;
     env = Env;
 
-  showResetSent = true;
-
     @action
     async login() {
         try {
