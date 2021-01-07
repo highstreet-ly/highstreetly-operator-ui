@@ -3,7 +3,6 @@
 {{/each}}
 
 <div class="h-screen bg-gray-200">
-  <div class="container mx-auto">
     <OrdersPanel
         @query={{this.orderQuery}}
         @eventInstance={{this.eventInstance}}
@@ -11,7 +10,6 @@
         @commandType="order-confirmed,order-processing,order-refunded"
         @backRoute="index"
     />
-  </div>
 </div>
 
 {{outlet}}

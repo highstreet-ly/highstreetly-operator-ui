@@ -34,7 +34,7 @@ export default class ApplicationRoute extends Route {
     }
     if (this.session.isAuthenticated) {
       if (!this.currentUser.isOperator) {
-      
+
        await  this.session.invalidate()
       }
     }
