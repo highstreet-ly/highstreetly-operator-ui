@@ -44,7 +44,7 @@
               <div class="text-sm text-gray-900"><b>3</b> orders ready to ship</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-{{if event.isPublished 'green' 'red' }}-100 text-{{if event.isPublished 'green' 'red' }}-800">
+              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{#if event.isPublished}}bg-green-100 text-green-800{{else}}bg-red-100 text-red-800{{/if}}">
                   {{if event.isPublished 'Enabled' 'Disabled' }}
                 </span>
             </td>
