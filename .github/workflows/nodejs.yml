@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install -g ember-cli
+    - run: npm install -g ember-cli tailwindcss
     - run: npm install
     - run: ember build
       env:
@@ -38,4 +38,4 @@ jobs:
         TLD: ly
         WIDGET_API: https://api.widget.highstreet.ly
         STRIPE_CLIENT_ID: ca_BZCgKyvK7Ywug3UOghG5VHADqYbNRTz9
-      
+
