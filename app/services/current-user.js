@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import Env from 'highstreetly-operator-ui/config/environment';
+import { computed } from '@ember/object';
 
 export default class CurrentUserService extends Service {
     @service
@@ -12,9 +13,51 @@ export default class CurrentUserService extends Service {
     @service
     session
 
-    // sleep(ms) {
-    //     return new Promise(resolve => setTimeout(resolve, ms));
-    // }
+    @computed('user.role.@each')
+    get isAdmin() {
+        return this.isInRoleSync('Admin')
+    }
+
+    @computed('user.role.@each')
+    get isEventOrganiser() {
+        return this.isInRoleSync('EventOrganiser')
+    }
+
+    @computed('user.role.@each')
+    get isDashUser() {
+        return this.isInRoleSync('DashUser')
+    }
+
+
+    @computed('user.role.@each')
+    get isOperator() {
+        return this.isInRoleSync('Operator')
+    }
+
+    isInRoleSync(role) {
+
+        function findRole(element) {
+            return element === role;
+        }
+
+        if (!this.user.role) {
+            // this user hasn't created an event yet so we need to get them to do that
+            // before we can progress anywhere
+            // https://sonaticket.myjetbrains.com/youtrack/issue/st-20
+        }
+
+        if (this.user.role && this.user.role.find && this.user.role.find(findRole)) {
+            return true;
+        }
+
+        // this is dumb but if there is only one element in the roles array
+        // it shows up as a string not a one element array
+        if (this.user.role && this.user.role === role) {
+            return true;
+        }
+
+        return false;
+    }
 
     async load() {
         if (this.loaded) {
@@ -57,8 +100,8 @@ export default class CurrentUserService extends Service {
             }
         }
         catch (e) {
-          //  this.session.invalidate();
-          console.log(e)
+            //  this.session.invalidate();
+            console.log(e)
         }
         finally {
             this.set('loading', false);

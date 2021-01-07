@@ -4,18 +4,39 @@ import classic from 'ember-classic-decorator';
 @classic
 export default class ApplicationRoute extends Route {
 
-    @service session
-    @service router
-    @service currentUser
+  @service session
+  @service router
+  @service currentUser
+  @service highstreetlySignalr
 
-    beforeModel() {
-        this._super(...arguments);
-        return this._loadCurrentUser();
+  model() {
+    if (this.session.isAuthenticated) {
+      this.highstreetlySignalr.initialize(this.currentUser.eventOrganiser.id);
     }
+  }
 
-    _loadCurrentUser() {
-        return this.currentUser.load().catch(() => {
-          this.session.invalidate()
-        });
+  async beforeModel() {
+    this._super(...arguments);
+    await this._loadCurrentUser();
+  }
+
+  async sessionAuthenticated() {
+    let _super = this._super;
+    await this._loadCurrentUser();
+    _super.call(this, ...arguments);
+  }
+
+  async _loadCurrentUser() {
+    try {
+      await this.currentUser.load()
+    } catch (e) {
+      this.session.invalidate()
+    }
+    if (this.session.isAuthenticated) {
+      if (!this.currentUser.isOperator) {
+      
+       await  this.session.invalidate()
       }
+    }
+  }
 }
