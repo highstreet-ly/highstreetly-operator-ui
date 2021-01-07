@@ -14,12 +14,15 @@ export default class HighstreetlySignalrService extends Service {
             .withUrl(`${Env.sonatribe.OpsApi}/connection`)
             .build();
 
-        connection.on('broadcastMessage',  (name, message) => {
+        connection.on('broadcastMessage', (name, m) => {
             console.log(`recieved message: ${message}`)
-            if(message === "order-confirmed"){
+            var message = JSON.parse(m)
+
+            if (message.Status === "order-confirmed") {
+                alert('order confirmed')
                 // this.notifications.success(`New order placed`, { autoClear: true });
             }
-            
+
             this.eventBus.publish(message);
         });
 
