@@ -7,11 +7,13 @@ export default class OrdersOrderRoute extends Route {
 
   async model(params) {
     return {
+      shopId: params.event_instance_id,
       order: await this.store.findRecord('order', params.order_id)
     }
   }
 
   setupController(controller, model) {
     controller.set('order', model.order);
+    controller.set('shopId', model.shopId);
   }
 }

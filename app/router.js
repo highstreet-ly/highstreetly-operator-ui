@@ -10,8 +10,7 @@ Router.map(function() {
   this.route('login');
   this.route('callback');
   this.route('u', function() {
-    this.route('orders', function() {
-      this.route('index', { path:':event_instance_id' })
+    this.route('orders', { path:'orders/:event_instance_id' }, function() {
       this.route('order', { path:'order/:order_id' });
     });
   });
