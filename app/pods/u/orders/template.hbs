@@ -1,5 +1,5 @@
 <div class="flex">
-  <div class="flex-1 h-screen bg-gray-200 border-r-gray-200 border-r-2">
+  <div class="flex-1 h-screen bg-gray-200 border-r-gray-200 border-r-2 overflow-y-scroll">
     <OrdersPanel
         @query={{this.orderQuery}}
         @eventInstance={{this.eventInstance}}
@@ -11,3 +11,7 @@
 
   {{outlet}}
 </div>
+
+<style>
+  body{ overflow-hidden; }
+</style>
