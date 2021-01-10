@@ -11623,6 +11623,11 @@ through@^2.3.6:
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
 
+time-ago-lite@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/time-ago-lite/-/time-ago-lite-1.0.3.tgz#bd6d67fe244e8df36961ca40b59ca9b86659a07c"
+  integrity sha512-K/XjTtYvnpRAGeC5rNOhh9mZKBxHDZ8SNESMvjV+6HlFqJmfk6fLrXGFDbpMe+epgjEmvsyiCgtkOre2/T8cYg==
+
 time-zone@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/time-zone/-/time-zone-1.0.0.tgz#99c5bf55958966af6d06d83bdf3800dc82faec5d"

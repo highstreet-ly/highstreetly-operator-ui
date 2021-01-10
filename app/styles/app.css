@@ -5,3 +5,16 @@
 
 @import "tailwindcss/utilities";
 @import "utilities.css";
+
+table th, table td, table.link-pad td a {
+  min-height:100px;
+  @apply py-3 px-6 align-middle;
+}
+
+table.link-pad a {
+  @apply block flex items-center;
+}
+
+table.link-pad td {
+  @apply px-0 py-0;
+}

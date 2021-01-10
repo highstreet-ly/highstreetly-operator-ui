@@ -1,0 +1,11 @@
+<ul>
+  {{#each this.truncatedItems as |item|}}
+    <li>
+      {{item.[ticket-details].name}}
+      <small>(extras, listed, here}</small>
+    </li>
+  {{/each}}
+  {{#if (gt @items.length this.truncatedItems.length)}}
+    <li><small>+{{this.numberNotDisplayed}} more</small></li>
+  {{/if}}
+</ul>
