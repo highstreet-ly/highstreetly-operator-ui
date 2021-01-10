@@ -1,7 +1,11 @@
-<div class="flex-1 h-screen bg-gray-200 overflow-y-scroll">
-  <div class="absolute right-0 top-0">
-    <LinkTo class="py-2 px-4 bg-blue-100 m-1 inline-block rounded-sm text-sm uppercase font-bold" @route="u.orders" model={{this.shopid}}>&lt; Back</LinkTo>
+<div class="flex-1 h-screen bg-gray-200 overflow-y-scroll relative">
+  <div class="absolute left-0 top-0">
+    <LinkTo class="py-2 px-4 bg-blue-100 mx-2 my-2 inline-block rounded-sm text-xs uppercase font-bold" @route="u.orders" model={{this.shopid}}>&lt; Back</LinkTo>
   </div>
+  <!--<div class="absolute right-0 top-0">
+    <LinkTo class="py-2 px-4 bg-gray-100 mx-2 my-2 inline-block rounded-sm text-xs uppercase font-bold" @route="u.order" @model={{this.order}}>Full Screen</LinkTo>
+  </div>-->
+
   <div class="container">
     <OrderPanel @order={{this.order}}></OrderPanel>
   </div>

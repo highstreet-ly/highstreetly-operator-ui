@@ -1,19 +1,17 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
-export default class OrdersOrderRoute extends Route {
+export default class OrderRoute extends Route {
   @service
   store;
 
   async model(params) {
-    return await {
-      shopId: params.event_instance_id,
+    return {
       order: await this.store.findRecord('order', params.order_id)
     }
   }
 
   setupController(controller, model) {
     controller.set('order', model.order);
-    controller.set('shopId', model.shopId);
   }
 }

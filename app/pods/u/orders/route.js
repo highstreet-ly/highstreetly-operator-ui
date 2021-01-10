@@ -20,9 +20,9 @@ export default class OrdersRoute extends Route {
         'event-instance-id': model.eventInstance.id,
         'status-text': 'Paid'
       },
-      sort: '-created-on',
+      sort: '-confirmed-on',
       page: {
-        'size': 10,
+        'size': 100,
         'number': 1
       }
     });

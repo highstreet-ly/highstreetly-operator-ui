@@ -13,5 +13,6 @@ Router.map(function() {
     this.route('orders', { path:'orders/:event_instance_id' }, function() {
       this.route('order', { path:'order/:order_id' });
     });
+    this.route('order', { path:'order/:order_id' });
   });
 });
