@@ -77,3 +77,11 @@ table.link-pad td {
 @keyframes rotateY {
   to { transform: rotateY(360deg); }
 }
+
+.tabs .tab a {
+  @apply block p-3 bg-gray-100 text-xs uppercase border-r-1 border-b-1 border-gray-200;
+}
+
+.tabs .tab a.active {
+  @apply bg-gray-200 font-bold;
+}

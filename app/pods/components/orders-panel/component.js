@@ -1,121 +1,137 @@
 import classic from 'ember-classic-decorator';
-import { inject as service } from '@ember/service';
+import {inject as service} from '@ember/service';
 import Component from '@ember/component';
-import { action } from '@ember/object';
-import { debounce } from '@ember/runloop';
-import { isEmpty } from '@ember/utils';
+import {action} from '@ember/object';
+import {debounce} from '@ember/runloop';
+import {isEmpty} from '@ember/utils';
+import {tracked} from '@glimmer/tracking';
 
 @classic
 export default class OrdersPanel extends Component {
-    @service
-    store;
+  @service
+  store;
 
-    @service
-    eventBus;
+  @service
+  eventBus;
 
-    viewOrderVisible = false;
-    pageSize = 10;
-    pageNumber = null;
-    recordCount = null;
-    query = null;
-    commandType = null;
+  viewOrderVisible = false;
+  pageSize = 10;
+  pageNumber = null;
+  recordCount = null;
+  query = null;
+  commandType = null;
 
-    constructor() {
-        super(...arguments);
-        this.imageOptions = "w_80";
-        this.foundDraftOrders = {};
+  @tracked loading = true;
+  @tracked orders = [];
+
+  @tracked status = null;
+
+  constructor() {
+    super(...arguments);
+    this.imageOptions = 'w_80';
+    this.foundDraftOrders = {};
+  }
+
+  async init() {
+    super.init(...arguments);
+
+    if (!this.get('isMobile.any')) {
+      this.set('pageSize', 10);
     }
 
-    async init() {
-        super.init(...arguments);
-
-        if (!this.get('isMobile.any')) {
-            this.set('pageSize', 10)
-        }
-
-        if (!isEmpty(this.commandType)) {
-            this.commandType.split(',').forEach((cmd) => this.eventBus.subscribe(cmd,this, this.handleUpdate))
-        }
-
-        await this.loadPosts(1);
+    if (!isEmpty(this.commandType)) {
+      this.commandType.split(',').forEach((cmd) => this.eventBus.subscribe(cmd, this, this.handleUpdate));
     }
 
-    willDestroyElement() {
-        try{
-            this.commandType.split(',').forEach((cmd) => this.eventBus.unsubscribe(cmd,this, this.handleUpdate))
-        }catch{
+    await this.loadPosts(1);
+  }
 
-        }
-        this._super(...arguments);
+  willDestroyElement() {
+    try {
+      this.commandType.split(',').forEach((cmd) => this.eventBus.unsubscribe(cmd, this, this.handleUpdate));
     }
+    catch {
 
-     handleUpdate() {
-         this.loadPosts(1);
     }
+    this._super(...arguments);
+  }
 
-    async loadPosts(getPageNumber) {
-        this.set('loading', true);
-        let q = this.query || {};
-        q.page = {};
-        q.page.number = getPageNumber;
-        q.page.size = this.pageSize;
+  handleUpdate() {
+    this.loadPosts(1);
+  }
 
-        this.set('query', q);
+  async loadPosts(getPageNumber) {
+    this.set('loading', true);
+    let q = this.query || {};
+    q.page = {};
+    q.page.number = getPageNumber;
+    q.page.size = this.pageSize;
 
-        let result = await this.store.query('order', this.query);
+    this.set('query', q);
 
-        this.set('orders', result);
+    let result = await this.store.query('order', this.query);
 
-        this.setProperties({
-            'recordCount': result.get('meta.total-records'),
-            'pageNumber': getPageNumber
-        });
-        this.set('loading', false);
+    this.set('orders', result);
+
+    this.setProperties({
+      'recordCount': result.get('meta.total-records'),
+      'pageNumber': getPageNumber,
+    });
+    this.set('loading', false);
+  }
+
+  async doSearchInternal(search) {
+    this.set('loading', true);
+    let q = this.query;
+    q.filter['human-readable-id'] = 'like:' + search;
+    q.page.number = 1;
+
+    let result = await this.store.query('order', this.query);
+
+    this.set('orders', result);
+
+    this.setProperties({
+      'recordCount': result.get('meta.total-records'),
+    });
+
+    this.set('loading', false);
+  }
+
+  get filteredOrders() {
+    let orders = this.orders;
+    let status = this.status;
+
+    if (status) {
+      return orders.filterBy('statusText', status);
+    } else {
+      return orders;
     }
+  }
 
-    async doSearchInternal(search) {
-        this.set('loading', true);
-        let q = this.query;
-        q.filter['human-readable-id'] = 'like:' + search;
-        q.page.number = 1;
+  @action
+  closeOrderModal() {
+    let viewOrderModal = this.element.querySelector('#viewOrderModal');
+    viewOrderModal.style.display = 'none';
+    viewOrderModal.className = 'modal fade';
+  }
 
-        let result = await this.store.query('order', this.query);
+  @action
+  async viewOrder(order) {
+    this.set('viewOrderVisible', true);
+  }
 
-        this.set('orders', result);
+  @action
+  async getPage(getPageNumber) {
+    this.loadPosts(getPageNumber);
+  }
 
-        this.setProperties({
-            'recordCount': result.get('meta.total-records')
-        });
+  @action
+  setSort(sortBy) {
+    this.set('sortBy', [sortBy]);
+  }
 
-        this.set('loading', false);
-    }
-
-
-
-    @action
-    closeOrderModal() {
-        let viewOrderModal = this.element.querySelector('#viewOrderModal');
-        viewOrderModal.style.display = "none";
-        viewOrderModal.className = "modal fade";
-    }
-
-    @action
-    async viewOrder(order) {
-        this.set('viewOrderVisible', true);
-    }
-
-    @action
-    async getPage(getPageNumber) {
-        this.loadPosts(getPageNumber);
-    }
-
-    @action
-    setSort(sortBy) {
-        this.set('sortBy', [sortBy])
-    }
-
-    @action
-    async doSearch(search) {
-        debounce(this, this.doSearchInternal, search, 500);
-    }
+  @action
+  async doSearch(search) {
+    debounce(this, this.doSearchInternal, search, 500);
+  }
 }
