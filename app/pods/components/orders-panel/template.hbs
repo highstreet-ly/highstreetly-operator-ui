@@ -22,20 +22,20 @@
       </th>
     </tr>
     </thead>
-    <tbody class="bg-white divide-y divide-gray-200 text-sm font-bold text-base">
+    <tbody class="bg-white divide-y divide-gray-200 text-sm font-bold">
       {{#each filteredOrders as |order|}}
         <tr>
           <td class="table__reference">
             <LinkTo @route="u.orders.order" @model={{order.id}} class="whitespace-nowrap">{{order.humanReadableId}}</LinkTo>
           </td>
 
-          <td class="text-base table__date">
+          <td class="uppercase table__date">
             <LinkTo @route="u.orders.order" @model={{order.id}} class="whitespace-nowrap">
               <TimeAgo @date={{order.confirmedOn}}/>
             </LinkTo>
           </td>
 
-          <td class="text-xs font-normal table__order">
+          <td class="text-xxs table__order font-normal">
             <LinkTo @route="u.orders.order" @model={{order.id}} class="whitespace-nowrap">
               <ItemsList @items={{order.tickets}} @num="2"/>
 
@@ -50,13 +50,13 @@
             </LinkTo>
           </td>
 
-          <td class="table__type">
+          <td class="uppercase table__type">
             <LinkTo @route="u.orders.order" @model={{order.id}} class="whitespace-nowrap">
               {{order.typeText}}
             </LinkTo>
           </td>
 
-          <td class="table__owner">
+          <td class="uppercase table__owner">
             <LinkTo @route="u.orders.order" @model={{order.id}} class="whitespace-nowrap">
               Chris Mou
             </LinkTo>

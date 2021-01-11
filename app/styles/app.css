@@ -15,6 +15,10 @@ table.link-pad a {
   @apply block flex items-center;
 }
 
+table.link-pad tr:hover a {
+  @apply bg-gray-50;
+}
+
 table.link-pad td {
   @apply px-0 py-0;
 }
