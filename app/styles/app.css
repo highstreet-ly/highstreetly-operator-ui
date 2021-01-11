@@ -6,6 +6,10 @@
 @import "tailwindcss/utilities";
 @import "utilities.css";
 
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 table th, table td, table.link-pad td a {
   min-height:100px;
   @apply py-3 px-6 align-middle;
