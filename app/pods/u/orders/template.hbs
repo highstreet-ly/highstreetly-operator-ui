@@ -1,15 +1,20 @@
-<div class="flex text-center tabs">
-  <div class="flex-1 tab">
-    <LinkTo @route="u.orders" @model={{this.eventInstance}} @query={{hash status=null}}>All orders</LinkTo>
+<div class="flex">
+  <div class="flex flex-1 text-center tabs shadow">
+    <div class="flex-1 tab">
+      <LinkTo @route="u.orders" @model={{this.eventInstance}} @query={{hash status=null}}>All orders</LinkTo>
+    </div>
+    <div class="flex-1 tab">
+      <LinkTo @route="u.orders" @model={{this.eventInstance}} @query={{hash status="Paid"}}>Ready to start</LinkTo>
+    </div>
+    <div class="flex-1 tab">
+      <LinkTo @route="u.orders" @model={{this.eventInstance}} @query={{hash status="Processing"}}>In progress</LinkTo>
+    </div>
+    <div class="flex-1 tab">
+      <LinkTo @route="u.orders" @model={{this.eventInstance}} @query={{hash status="ProcessingComplete"}}>Complete</LinkTo>
+    </div>
   </div>
-  <div class="flex-1 tab">
-    <LinkTo @route="u.orders" @model={{this.eventInstance}} @query={{hash status="Paid"}}>Ready to start</LinkTo>
-  </div>
-  <div class="flex-1 tab">
-    <LinkTo @route="u.orders" @model={{this.eventInstance}} @query={{hash status="Processing"}}>In progress</LinkTo>
-  </div>
-  <div class="flex-1 tab">
-    <LinkTo @route="u.orders" @model={{this.eventInstance}} @query={{hash status="ProcessingComplete"}}>Complete</LinkTo>
+  <div class="flex items-center justify-center text-center" style="flex:0 0 50px;" {{action 'toggleFilters'}}>
+    <FaIcon @icon="filter" class="text-gray-500" />
   </div>
 </div>
 
@@ -22,6 +27,7 @@
         @commandType="order-confirmed,order-processing,order-refunded"
         @backRoute="index"
         @status={{this.status}}
+        @filtersVisible={{this.filtersVisible}}
     />
   </div>
 

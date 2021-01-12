@@ -1,4 +1,4 @@
-<div class="shadow overflow-hidden border-b bg-white border-gray-200 rounded-lg p-8 md:p-8">
+<div class="shadow border-b bg-white border-gray-200 rounded-lg p-8">
 
   <div class="text-center text-md md:text-lg">
     <p class="text-xs">Order Number:</p>
@@ -18,6 +18,9 @@
       <p><b>{{@order.deliveryLine1}}<br>{{@order.deliveryPostcode}}</b></p>
     </div>
     <div class="contact">
+      <h6 class="text-xs">Name</h6>
+      <p><b>{{@order.ownerName}}</b></p>
+
       <h6 class="text-xs">Phone</h6>
       <p><b>{{@order.ownerPhone}}</b></p>
 
@@ -35,7 +38,6 @@
           {{#if item.ticketTypeModel.mainImageId}}
             {{cloudinary-image imageId=item.ticketTypeModel.mainImageId  class="img-lg rounded" options=imageOptions }}
           {{/if}}
-          {{log item.ticket-details}}
           {{item.ticket-details.quantity}}<span class="text-lg">x</span>
           {{item.ticket-details.name}} {{#if item.ticket-details.display-name}}({{item.ticket-details.display-name}}){{/if}}
           <ul class="text-sm mt-1">

@@ -12,7 +12,6 @@ export default class OrdersRoute extends Route {
   }
 
   setupController(controller, model) {
-    console.log(model);
     controller.set('eventInstance', model);
     controller.set('orderQuery', {
       filter: {
@@ -25,6 +24,5 @@ export default class OrdersRoute extends Route {
         'number': 1
       }
     });
-    console.log(controller.get('orderQuery'));
   }
 }

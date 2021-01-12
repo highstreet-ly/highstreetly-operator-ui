@@ -1,3 +1,16 @@
+
+{{#if @filtersVisible}}
+  <div class="flex">
+    <div class="flex-grow ">
+      <div class="p-2">
+        <Input @value={{this.filterSearch}} type="text" placeholder="Search" class="text-xs leading-6 py-0 px-2"/>
+        <button type="submit" class="btn btn-primary btn-xs leading-6 py-0 px-2">Search</button>
+        {{this.filterSearch}}
+      </div>
+    </div>
+  </div>
+{{/if}}
+
 <div class="shadow overflow-hidden border-b border-gray-200 rounded-lg">
   <table class="min-w-full divide-y divide-gray-200 link-pad">
     <thead class="bg-gray-50">
@@ -23,7 +36,7 @@
     </tr>
     </thead>
     <tbody class="bg-white divide-y divide-gray-200 text-sm font-bold">
-      {{#each filteredOrders as |order|}}
+      {{#each this.filteredOrders as |order|}}
         <tr>
           <td class="table__reference">
             <LinkTo @route="u.orders.order" @model={{order.id}} class="whitespace-nowrap">{{order.humanReadableId}}</LinkTo>

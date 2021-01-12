@@ -23,6 +23,11 @@ module.exports = function(environment) {
       apiKey: '967363294944649'
     },
 
+    fontawesome: {
+      warnIfNoIconsIncluded: false,
+      // ...
+    },
+
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
