@@ -28,7 +28,7 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin) {
           // 'end-date': `gt:${new moment().format()}`,
           //'is-published': `eq:true`
         },
-        sort: 'start-date',
+        //sort: 'start-date',
       }),
     };
   }

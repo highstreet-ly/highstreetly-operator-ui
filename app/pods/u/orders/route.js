@@ -16,8 +16,9 @@ export default class OrdersRoute extends Route {
     controller.set('orderQuery', {
       filter: {
         'event-instance-id': model.id,
-        'status-text': 'Paid'
+        'status': 'Paid'
       },
+      include:['tickets'],
       sort: '-confirmed-on',
       page: {
         'size': 100,

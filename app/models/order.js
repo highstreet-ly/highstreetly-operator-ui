@@ -1,4 +1,4 @@
-import Model from '@ember-data/model';
+import Model , { hasMany } from '@ember-data/model';
 import { attr } from '@ember-data/model';
 
 export default class OrderModel extends Model {
@@ -26,7 +26,7 @@ export default class OrderModel extends Model {
   @attr('number')
   status;
 
-  @attr('raw')
+  @hasMany('order-ticket', { async: true })
   tickets;
 
   @attr('number')
