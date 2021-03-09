@@ -35,6 +35,12 @@ export default class OrdersPanel extends Component {
     this.foundDraftOrders = {};
   }
 
+  async didUpdateAttrs() {
+    this._super(...arguments);
+
+    await this.loadPosts(1);
+  }
+
   async init() {
     super.init(...arguments);
 

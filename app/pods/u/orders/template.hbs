@@ -3,16 +3,16 @@ Version: {{version}}
 <div class="flex">
   <div class="flex flex-1 text-center tabs shadow">
     <div class="flex-1 tab">
-      <LinkTo @route="u.orders" @model={{this.eventInstance}} @query={{hash status=null}}>All orders</LinkTo>
+      <LinkTo @route="u.orders" @model={{this.eventInstance.id}} @query={{hash status=null}}>All orders</LinkTo>
     </div>
     <div class="flex-1 tab">
-      <LinkTo @route="u.orders" @model={{this.eventInstance}} @query={{hash status="Paid"}}>Ready to start</LinkTo>
+      <LinkTo @route="u.orders" @model={{this.eventInstance.id}} @query={{hash status="Paid"}}>Ready to start</LinkTo>
     </div>
     <div class="flex-1 tab">
-      <LinkTo @route="u.orders" @model={{this.eventInstance}} @query={{hash status="Processing"}}>In progress</LinkTo>
+      <LinkTo @route="u.orders" @model={{this.eventInstance.id}} @query={{hash status="Processing"}}>In progress</LinkTo>
     </div>
     <div class="flex-1 tab">
-      <LinkTo @route="u.orders" @model={{this.eventInstance}} @query={{hash status="ProcessingComplete"}}>Complete</LinkTo>
+      <LinkTo @route="u.orders" @model={{this.eventInstance.id}} @query={{hash status="ProcessingComplete"}}>Complete</LinkTo>
     </div>
   </div>
   <div class="flex items-center justify-center text-center" style="flex:0 0 50px;" {{action 'toggleFilters'}}>
