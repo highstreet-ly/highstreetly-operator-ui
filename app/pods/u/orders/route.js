@@ -1,6 +1,7 @@
 import classic from 'ember-classic-decorator';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
+import Env from 'highstreetly-operator-ui/config/environment';
 
 @classic
 export default class OrdersRoute extends Route {
@@ -12,6 +13,7 @@ export default class OrdersRoute extends Route {
   }
 
   setupController(controller, model) {
+    controller.set('version', Env.sonatribe.Version);
     controller.set('eventInstance', model);
     controller.set('orderQuery', {
       filter: `expr:and(equals(event-instance-id,'${model.id}'),equals(status,'Paid'))`,
