@@ -35,10 +35,8 @@
     <ul>
       {{#each @order.tickets as | item |}}
         <li class="text-2xl md:text-4xl mt-4 font-bold">
-          {{item.ticketTypeConfiguration.mainImageId}}
           {{#if item.ticketTypeConfiguration.mainImageId}}
           <CloudinaryImage @imageId={{item.ticketTypeConfiguration.mainImageId}} @options={{this.imageOptions}} />
-            {{!-- {{cloudinary-image imageId=item.ticketTypeConfiguration.mainImageId  class="img-lg rounded" options=imageOptions }} --}}
           {{/if}}
           {{item.ticketDetails.quantity}}<span class="text-lg">x</span>
           {{item.ticketDetails.name}} {{#if item.ticketDetails.displayName}}({{item.ticketDetails.displaName}}){{/if}}
