@@ -23,13 +23,13 @@ export default class OrderModel extends Model {
   @attr('number')
   totalAmount;
 
-  @hasMany('order-ticket', {async: true})
+  @hasMany('order-ticket')
   tickets;
 
-  @attr('number')
+  @attr('string')
   deliveryLine1;
 
-  @attr('number')
+  @attr('string')
   deliveryPostcode;
 
   // payments: DS.hasMany('payment', { async: true }),

@@ -5,10 +5,10 @@ export default class OrdersOrderRoute extends Route {
   @service
   store;
 
-  async model(params) {
-    return await {
+   model(params) {
+    return  {
       shopId: params.event_instance_id,
-      order: await this.store.findRecord('order', params.order_id)
+      order: this.store.findRecord('order', params.order_id)
     }
   }
 

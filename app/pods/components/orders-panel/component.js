@@ -115,7 +115,7 @@ export default class OrdersPanel extends Component {
     /* orders.filter(function(order, index, array) {
       return (
         order &&
-        (order.statusText && order.statusText === status)
+        (order.status && order.status === status)
         && order.humanReadableId.includes(filterSearch)
          (
           !filterSearch || (
@@ -126,7 +126,7 @@ export default class OrdersPanel extends Component {
     }) */
 
     if (status) {
-      filteredOrders = orders.filterBy("statusText", status);
+      filteredOrders = orders.filterBy("status", status);
     } else {
       // convert to standard array to shoehorn in this basic sort
       orders.forEach(function (o) {

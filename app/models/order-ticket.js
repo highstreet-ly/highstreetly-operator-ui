@@ -3,10 +3,10 @@ import { attr } from '@ember-data/model';
 
 export default class OrderTicketModel extends Model {
 
-    @belongsTo('ticketTypeConfiguration',  { async: true })
+    @belongsTo('ticketTypeConfiguration')
     ticketTypeConfiguration;
 
-    @belongsTo('ticketDetails')
+    @belongsTo('ticketDetail')
     ticketDetails;
 
     @belongsTo('order')

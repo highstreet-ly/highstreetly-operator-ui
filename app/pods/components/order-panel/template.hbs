@@ -7,7 +7,7 @@
     <p class="text-lg mt-1"><b>{{@order.typeText}}</b></p>
 
     <p>
-      <span class="text-xs">Order status:</span> <span class="px-2 py-1 inline-flex leading-5 font-semibold rounded-full bg-gray-200 text-gray-800">{{@order.statusText}}</span>
+      <span class="text-xs">Order status:</span> <span class="px-2 py-1 inline-flex leading-5 font-semibold rounded-full bg-gray-200 text-gray-800">{{@order.status}}</span>
     </p>
 
   </div>
@@ -35,21 +35,21 @@
     <ul>
       {{#each @order.tickets as | item |}}
         <li class="text-2xl md:text-4xl mt-4 font-bold">
-          {{#if item.ticketTypeModel.mainImageId}}
-            {{cloudinary-image imageId=item.ticketTypeModel.mainImageId  class="img-lg rounded" options=imageOptions }}
+          {{item.ticketTypeConfiguration.mainImageId}}
+          {{#if item.ticketTypeConfiguration.mainImageId}}
+          <CloudinaryImage @imageId={{item.ticketTypeConfiguration.mainImageId}} @options={{this.imageOptions}} />
+            {{!-- {{cloudinary-image imageId=item.ticketTypeConfiguration.mainImageId  class="img-lg rounded" options=imageOptions }} --}}
           {{/if}}
-          {{item.ticket-details.quantity}}<span class="text-lg">x</span>
-          {{item.ticket-details.name}} {{#if item.ticket-details.display-name}}({{item.ticket-details.display-name}}){{/if}}
-          <ul class="text-sm mt-1">
-            <li>+ extras not piped in yet</li>
-          </ul>
-          {{!--{{#if item.ticket-details.product-extras}}
+          {{item.ticketDetails.quantity}}<span class="text-lg">x</span>
+          {{item.ticketDetails.name}} {{#if item.ticketDetails.displayName}}({{item.ticketDetails.displaName}}){{/if}}
+         
+          {{#if item.ticketDetails.productExtras}}
             <ul>
-              {{#each item.ticket-details.product-extras as |extra|}}
+              {{#each item.ticketDetails.productExtras as |extra|}}
                 <li>+ {{extra.name}}</li>
               {{/each}}
             </ul>
-          {{/if}}--}}
+          {{/if}}
         </li>
       {{/each}}
     </ul>

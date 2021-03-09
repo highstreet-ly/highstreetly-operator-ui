@@ -9,6 +9,9 @@ export default class TicketTypeConfigurationModel extends Model {
     @attr('string')
     description
 
+    @attr('string')
+    mainImageId
+
     @attr('number')
     price
 
