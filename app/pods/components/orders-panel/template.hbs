@@ -49,16 +49,17 @@
           </td>
 
           <td class="text-xxs table__order font-normal">
+
+            {{log order.tickets}}
             <LinkTo @route="u.orders.order" @model={{order.id}} class="whitespace-nowrap">
               <ItemsList @items={{order.tickets}} @num="2"/>
-
             </LinkTo>
           </td>
 
           <td class="table__status">
             <LinkTo @route="u.orders.order" @model={{order.id}} class="whitespace-nowrap">
                     <span class="inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-800 px-2">
-                      {{order.statusText}}
+                      {{order.status}}
                     </span>
             </LinkTo>
           </td>
@@ -71,7 +72,7 @@
 
           <td class="uppercase table__owner">
             <LinkTo @route="u.orders.order" @model={{order.id}}>
-              Chris Mou
+              {{order.ownerEmail}}
             </LinkTo>
           </td>
         </tr>

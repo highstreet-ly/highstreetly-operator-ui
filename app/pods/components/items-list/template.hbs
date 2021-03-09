@@ -1,8 +1,8 @@
 <ul>
-  {{#each this.truncatedItems as |item|}}
+  {{#each this.items as |item|}}
     <li>
-      {{item.[ticket-details].name}}
-      <small>(extras, listed, here}</small>
+      {{log item}}123
+      {{item.ticketDetails.name}}
     </li>
   {{/each}}
   {{#if (gt @items.length this.truncatedItems.length)}}

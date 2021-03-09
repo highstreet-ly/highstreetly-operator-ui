@@ -23,10 +23,7 @@ export default class OrderModel extends Model {
   @attr('number')
   totalAmount;
 
-  @attr('number')
-  status;
-
-  @hasMany('order-ticket', { async: true })
+  @hasMany('order-ticket', {async: true})
   tickets;
 
   @attr('number')
@@ -47,7 +44,7 @@ export default class OrderModel extends Model {
   humanReadableId;
 
   @attr('string')
-  statusText;
+  status;
 
   @attr('boolean')
   isClickAndCollect;
