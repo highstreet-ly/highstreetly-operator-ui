@@ -1,4 +1,22 @@
 <div class="shadow border-b bg-white border-gray-200 rounded-lg p-8">
+  <nav class="bg-white-800">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div class="relative flex items-center justify-between h-16">
+
+        <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+
+          <div class="hidden sm:block sm:ml-6">
+            <div class="flex space-x-4">
+               <button {{action "setProcessing" @order}} class="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium">Set processing</button>
+              <a {{action "refund" this.order}} href="#"
+                class="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium">Refund</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </nav>
 
   <div class="text-center text-md md:text-lg">
     <p class="text-xs">Order Number:</p>
@@ -7,7 +25,8 @@
     <p class="text-lg mt-1"><b>{{@order.typeText}}</b></p>
 
     <p>
-      <span class="text-xs">Order status:</span> <span class="px-2 py-1 inline-flex leading-5 font-semibold rounded-full bg-gray-200 text-gray-800">{{@order.status}}</span>
+      <span class="text-xs">Order status:</span> <span
+        class="px-2 py-1 inline-flex leading-5 font-semibold rounded-full bg-gray-200 text-gray-800">{{@order.status}}</span>
     </p>
 
   </div>
@@ -34,108 +53,109 @@
 
     <ul>
       {{#each @order.tickets as | item |}}
-        <li class="text-2xl md:text-4xl mt-4 font-bold">
-          {{#if item.ticketTypeConfiguration.mainImageId}}
-          <CloudinaryImage @imageId={{item.ticketTypeConfiguration.mainImageId}} @options={{this.imageOptions}} />
-          {{/if}}
-          {{item.ticketDetails.quantity}}<span class="text-lg">x</span>
-          {{item.ticketDetails.name}} {{#if item.ticketDetails.displayName}}({{item.ticketDetails.displaName}}){{/if}}
-         
-          {{#if item.ticketDetails.productExtras}}
-            <ul>
-              {{#each item.ticketDetails.productExtras as |extra|}}
-                <li>+ {{extra.name}}</li>
-              {{/each}}
-            </ul>
-          {{/if}}
-        </li>
+      <li class="text-2xl md:text-4xl mt-4 font-bold">
+        {{#if item.ticketTypeConfiguration.mainImageId}}
+        <CloudinaryImage @imageId={{item.ticketTypeConfiguration.mainImageId}} @options={{this.imageOptions}} />
+        {{/if}}
+        {{item.ticketDetails.quantity}}<span class="text-lg">x</span>
+        {{item.ticketDetails.name}} {{#if item.ticketDetails.displayName}}({{item.ticketDetails.displaName}}){{/if}}
+
+        {{#if item.ticketDetails.productExtras}}
+        <ul>
+          {{#each item.ticketDetails.productExtras as |extra|}}
+          <li>+ {{extra.name}}</li>
+          {{/each}}
+        </ul>
+        {{/if}}
+      </li>
       {{/each}}
     </ul>
   </div>
 
   {{#if (eq @order.status 3)}}
 
-    {{#if @order.isClickAndCollect}}
-      <p style="text-align: left;">Let your customer know when @order is ready for collection.</p>
+  {{#if @order.isClickAndCollect}}
+  <p style="text-align: left;">Let your customer know when @order is ready for collection.</p>
 
-      <label class="col-sm-3 col-form-label">Day</label>
-      <div class="col-sm-9" data-children-count="1">
-        <EmberFlatpickr @date={{this.dateValue}} @onChange={{this.onDateChange}} @dateFormat="d/m/Y"
-                        class="form-control m-b-5 ember-text-field ember-view"/>
-      </div>
+  <label class="col-sm-3 col-form-label">Day</label>
+  <div class="col-sm-9" data-children-count="1">
+    <EmberFlatpickr @date={{this.dateValue}} @onChange={{this.onDateChange}} @dateFormat="d/m/Y"
+      class="form-control m-b-5 ember-text-field ember-view" />
+  </div>
 
-      <label class="col-sm-3 col-form-label">AM/PM</label>
-      <div class="col-sm-9" data-children-count="1">
-        <select class="form-control" onchange={{action 'onTimeofDayChange' value="target.value"}}>
-          <option value="AM">AM</option>
-          <option value="PM">PM</option>
-        </select>
-      </div>
-
-    {{/if}}
-
-    {{#if @order.isLocalDelivery}}
-
-      <p style="text-align: left;">Let your customer know a day and AMP/PM slot for when you plan to deliver @order.</p>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Day</label>
-            <div class="col-sm-9" data-children-count="1">
-              <EmberFlatpickr @date={{this.dateValue}} @onChange={{this.onDateChange}} @dateFormat="d/m/Y"
-                              class="form-control m-b-5 ember-text-field ember-view"/>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">AM/PM</label>
-            <div class="col-sm-9" data-children-count="1">
-              <select class="form-control" onchange={{action 'onTimeofDayChange' value="target.value"}}>
-                <option value="AM">AM</option>
-                <option value="PM">PM</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    {{/if}}
-
-    {{#if @order.isNationalDelivery}}
-
-      <p style="text-align: left;">Let your customer know a day and AMP/PM slot for when you plan to deliver @order.</p>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Day</label>
-            <div class="col-sm-9" data-children-count="1">
-              <EmberFlatpickr @date={{this.dateValue}} @onChange={{this.onDateChange}} @dateFormat="d/m/Y"
-                              class="form-control m-b-5 ember-text-field ember-view"/>
-            </div>
-          </div>
-        </div>
-        <diV class="col-md-6">
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">AM/PM</label>
-            <div class="col-sm-9" data-children-count="1">
-              <select class="form-control" onchange={{action 'onTimeofDayChange' value="target.value"}}>
-                <option value="AM">AM</option>
-                <option value="PM">PM</option>
-              </select>
-            </div>
-          </div>
-        </diV>
-      </div>
-
-      <p style="text-align: left;">Provide the tracking number and any notes to your customer.</p>
-      {{textarea value=@order.customerDispatchAdvisory class="form-control m-b-5" rows="5" }}
-
-    {{/if}}
-
-
-    <br>
+  <label class="col-sm-3 col-form-label">AM/PM</label>
+  <div class="col-sm-9" data-children-count="1">
+    <select class="form-control" onchange={{action 'onTimeofDayChange' value="target.value" }}>
+      <option value="AM">AM</option>
+      <option value="PM">PM</option>
+    </select>
+  </div>
 
   {{/if}}
+
+  {{#if @order.isLocalDelivery}}
+
+  <p style="text-align: left;">Let your customer know a day and AMP/PM slot for when you plan to deliver @order.</p>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Day</label>
+        <div class="col-sm-9" data-children-count="1">
+          <EmberFlatpickr @date={{this.dateValue}} @onChange={{this.onDateChange}} @dateFormat="d/m/Y"
+            class="form-control m-b-5 ember-text-field ember-view" />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">AM/PM</label>
+        <div class="col-sm-9" data-children-count="1">
+          <select class="form-control" onchange={{action 'onTimeofDayChange' value="target.value" }}>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{/if}}
+
+  {{#if @order.isNationalDelivery}}
+
+  <p style="text-align: left;">Let your customer know a day and AMP/PM slot for when you plan to deliver @order.</p>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Day</label>
+        <div class="col-sm-9" data-children-count="1">
+          <EmberFlatpickr @date={{this.dateValue}} @onChange={{this.onDateChange}} @dateFormat="d/m/Y"
+            class="form-control m-b-5 ember-text-field ember-view" />
+        </div>
+      </div>
+    </div>
+    <diV class="col-md-6">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">AM/PM</label>
+        <div class="col-sm-9" data-children-count="1">
+          <select class="form-control" onchange={{action 'onTimeofDayChange' value="target.value" }}>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+      </div>
+    </diV>
+  </div>
+
+  <p style="text-align: left;">Provide the tracking number and any notes to your customer.</p>
+  {{textarea value=@order.customerDispatchAdvisory class="form-control m-b-5" rows="5" }}
+
+  {{/if}}
+
+
+  <br>
+
+  {{/if}}
+
 
 </div>

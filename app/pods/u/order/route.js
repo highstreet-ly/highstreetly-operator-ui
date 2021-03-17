@@ -7,7 +7,7 @@ export default class OrderRoute extends Route {
 
   async model(params) {
     return {
-      order: await this.store.findRecord('order', params.order_id)
+      order: await this.store.findRecord('order', params.order_id, {include: 'tickets,tickets.ticket-details,tickets.ticket-details.product-extras'})
     }
   }
 
