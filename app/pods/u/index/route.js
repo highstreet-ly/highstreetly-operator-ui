@@ -10,24 +10,14 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin) {
 
   async model() {
 
-    let organiser = await this.store.query('event-organiser', {
+    let organiser = await this.store.findRecord('event-organiser', this.currentUser.eventOrganiser.id, {
       include: 'event-series.event-instances',
-      'filter[event-series.event-instances]': `expr:and(equals(deleted,'${false}'),equals(event-organiser-id,'${this.currentUser.eventOrganiser.id}'))`
     })
 
-    let eventSeries = await organiser.firstObject.get('eventSeries');
-
-    let eventInstances = [];
-
-    eventSeries.forEach((es) => {
-      es.eventInstances.forEach((ei) => {
-        eventInstances.push(ei)
-      })
-    })
+   
 
     return {
-      eventSeries: eventSeries,
-      operatorServices: eventInstances
+      organiser: organiser,
     };
   }
 
@@ -36,8 +26,6 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin) {
       controller.set('noOrganiser', true);
     }
 
-    controller.set('organiser', this.currentUser.eventOrganiser);
-    controller.set('operatorServices', models.operatorServices);
-    controller.set('eventSeries', models.eventSeries);
+    controller.set('organiser', models.organiser);
   }
 }
