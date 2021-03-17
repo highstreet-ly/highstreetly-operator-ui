@@ -10,11 +10,12 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin) {
 
   async model() {
 
-    let organiser = await this.store.findRecord('event-organiser', this.currentUser.eventOrganiser.id, {
-      include: 'event-series.event-instances'
+    let organiser = await this.store.query('event-organiser', {
+      include: 'event-series.event-instances',
+      'filter[event-series.event-instances]': `expr:and(equals(deleted,'${false}'),equals(event-organiser-id,'${this.currentUser.eventOrganiser.id}'))`
     })
 
-    let eventSeries = await organiser.get('eventSeries');
+    let eventSeries = await organiser.firstObject.get('eventSeries');
 
     let eventInstances = [];
 
