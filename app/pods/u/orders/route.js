@@ -38,7 +38,7 @@ export default class OrdersRoute extends Route {
       "fields[order-tickets]":"ticket-details",
       "fields[ticket-details]": 'price,quantity,display-name,name',
       "fields[product-extras]": 'price,name',
-      include: 'tickets,tickets.ticket-details,tickets.ticket-details.product-extras',
+      include: 'tickets.ticket-details.product-extras',
       sort: '-paid-date-time',
       page: {
         'size': 100,
