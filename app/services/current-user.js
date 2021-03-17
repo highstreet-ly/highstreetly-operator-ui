@@ -91,7 +91,9 @@ export default class CurrentUserService extends Service {
                 this.set('userModel', userModel);
 
                 if (user.eoid) {
-                    let organiser = await this.store.findRecord('event-organiser', user.eoid);
+                    let organiser = await this.store.findRecord('event-organiser', user.eoid, {
+                        include: 'event-series.event-instances',
+                    });
                     this.set('eventOrganiser', organiser);
                     //await this.getStats();
                 }
