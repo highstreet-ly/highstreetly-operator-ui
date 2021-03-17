@@ -1,5 +1,5 @@
 import classic from 'ember-classic-decorator';
-import {inject as service} from '@ember/service';
+import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
@@ -9,27 +9,24 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin) {
   currentUser;
 
   async model() {
-    let eventSeries = await this.store.query('event-series', {
-      filter: {
-        'event-organiser-id': this.currentUser.eventOrganiser.id,
-      },
-    });
+
+    let organiser = await this.store.findRecord('event-organiser', this.currentUser.eventOrganiser.id, {
+      include: 'event-series.event-instances'
+    })
+
+    let eventSeries = await organiser.get('eventSeries');
+
+    let eventInstances = [];
+
+    eventSeries.forEach((es) => {
+      es.eventInstances.forEach((ei) => {
+        eventInstances.push(ei)
+      })
+    })
 
     return {
       eventSeries: eventSeries,
-      operatorServices: await this.store.query('event-instance', {
-        fields: 'name,slug,start-date,end-date,main-image-id,is-published',
-        page: {
-          'size': 5,
-          'number': 1,
-        },
-        filter: {
-          'event-series-id': eventSeries.id,
-          // 'end-date': `gt:${new moment().format()}`,
-          //'is-published': `eq:true`
-        },
-        //sort: 'start-date',
-      }),
+      operatorServices: eventInstances
     };
   }
 
