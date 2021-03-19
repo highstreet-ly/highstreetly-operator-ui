@@ -10,10 +10,14 @@ export default class CallbackRoute extends Route.extend(OAuth2ImplicitGrantCallb
   @service
   session;
 
-  beforeModel() {
-console.log(this.session.isAuthenticated);
+  @service
+  currentUser;
+
+  async afterModel() {
     if (this.session.isAuthenticated) {
      this.transitionTo('u.index');
+    } else {
+      location.reload();
     }
   }
 }
