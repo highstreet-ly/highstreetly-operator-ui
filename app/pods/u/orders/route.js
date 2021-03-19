@@ -34,7 +34,7 @@ export default class OrdersRoute extends Route {
 
     controller.set('orderQuery', {
       filter: filter,
-      "fields[orders]": 'human-readable-id,confirmed-on,status,is-click-and-collect,is-national-delivery,owner-email',
+      "fields": 'human-readable-id,confirmed-on,status,is-click-and-collect,is-national-delivery,owner-email',
       "fields[order-tickets]":"ticket-details",
       "fields[ticket-details]": 'price,quantity,display-name,name',
       "fields[product-extras]": 'price,name',
