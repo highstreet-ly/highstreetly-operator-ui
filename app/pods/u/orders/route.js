@@ -5,7 +5,7 @@ import Env from 'highstreetly-operator-ui/config/environment';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 @classic
-export default class OrdersRoute extends Route.extend(AuthenticatedRouteMixin) {
+export default class OrdersRoute extends Route {
   @service
   store;
 

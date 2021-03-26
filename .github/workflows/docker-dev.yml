@@ -1,0 +1,59 @@
+name: Build the docker image for dev
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: docker registry credentials
+      env:
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: sonatribe
+      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - run: npm install -g ember-cli tailwindcss
+    - run: npm install
+    - id: get_version
+      uses: battila7/get-version-action@v2
+    - run: echo ${{ steps.get_version.outputs.version }}
+
+    - run: ember build production --env=production
+      env:
+        CI: true
+        A_RECORD: highstreetly
+        DASH_API: https://api.dashboard.highstreetly.work
+        DASH_UI: https://dashboard.highstreetly.work
+        OPS_API: https://api.ops.highstreetly.work
+        OPS_UI: https://ops.highstreetly.work
+        DOMAIN: highstreetly.work
+        IDS: https://ids.highstreetly.work
+        MAIN_API: https://api.highstreetly.work
+        MAIN_UI: https://highstreetly.work
+        NAMESPACE: highstreetly-work
+        ORDERS_API: https://api.orders.highstreetly.work
+        ORDERS_UI: https://orders.highstreetly.work
+        TICKETS_API: https://api.shop.highstreetly.work
+        TICKETS_UI: https://shop.highstreetly.work
+        TLD: work
+        WIDGET_API: https://api.widget.highstreetly.work
+        VERSION: ${{ steps.get_version.outputs.version }}
+        STRIPE_CLIENT_ID: ca_BZCgKyvK7Ywug3UOghG5VHADqYbNRTz9
+
+    - name: Build the Docker image sonatribe/highstreet-operator-dev
+      run: docker build -t sonatribe/highstreet-operator-dev:${{ steps.get_version.outputs.version }} .
+    - name: push sonatribe/highstreet-operator-dev
+      run: docker push sonatribe/highstreet-operator-dev:${{ steps.get_version.outputs.version }}
+
