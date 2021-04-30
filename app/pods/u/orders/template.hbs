@@ -1,5 +1,3 @@
-Version: {{version}}
-
 <div class="flex">
   <div class="flex flex-1 text-center tabs shadow">
     <div class="flex-1 tab">
@@ -31,6 +29,13 @@ Version: {{version}}
         @status={{this.status}}
         @filtersVisible={{this.filtersVisible}}
     />
+
+    {{#if version}}
+      <div class="text-center mt-3 text-xs">
+        {{version}}
+      </div>
+    {{/if}}
+
   </div>
 
   {{outlet}}
