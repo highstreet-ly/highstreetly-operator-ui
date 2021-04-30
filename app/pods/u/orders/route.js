@@ -5,7 +5,7 @@ import Env from 'highstreetly-operator-ui/config/environment';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
 @classic
-export default class OrdersRoute extends Route.extend(AuthenticatedRouteMixin) {
+export default class OrdersRoute extends Route {
   @service
   store;
 
@@ -35,7 +35,7 @@ export default class OrdersRoute extends Route.extend(AuthenticatedRouteMixin) {
 
     controller.set('orderQuery', {
       filter: filter,
-      "fields[orders]": 'human-readable-id,confirmed-on,status,is-click-and-collect,is-national-delivery,owner-email',
+      "fields": 'human-readable-id,confirmed-on,status,is-click-and-collect,is-national-delivery,owner-email',
       "fields[order-tickets]":"ticket-details",
       "fields[ticket-details]": 'price,quantity,display-name,name',
       "fields[product-extras]": 'price,name',
