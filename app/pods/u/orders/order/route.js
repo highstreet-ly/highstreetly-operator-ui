@@ -6,10 +6,10 @@ export default class OrdersOrderRoute extends Route.extend(AuthenticatedRouteMix
   @service
   store;
 
-   model(params) {
+   async model(params) {
     return  {
       shopId: params.event_instance_id,
-      order: this.store.findRecord('order', params.order_id)
+      order: await this.store.findRecord('order', params.order_id)
     }
   }
 

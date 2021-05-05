@@ -1,21 +1,16 @@
-<div class="shadow border-b bg-white border-gray-200 rounded-lg p-8">
-  <nav class="bg-white-800">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-      <div class="relative flex items-center justify-between h-16">
+<div class="shadow border-b bg-white border-gray-200 rounded-lg p-8 relative">
+  <SectionLoading @active={{this.loading}}></SectionLoading>
 
-        <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-
-          <div class="hidden sm:block sm:ml-6">
-            <div class="flex space-x-4">
-               <button {{action "setProcessing" @order}} class="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium">Set processing</button>
-              <a {{action "refund" this.order}} href="#"
-                class="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium">Refund</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
+  <nav class="text-center m-3">
+    {{#if (eq @order.status 'Paid')}}
+      <button {{action "setProcessing" @order}} class="btn btn-green my-1">Mark as In Progress</button>
+    {{/if}}
+    {{#if (eq @order.status 'Processing')}}
+      <button {{action "setComplete" @order}} class="btn btn-green my-2">Mark as Complete</button>
+    {{/if}}
+    {{#if (or (eq @order.status 'Paid') (eq @order.status 'Processing'))}}
+      <button {{action "refund" this.order}} href="#" class="btn btn-red my-2">Refund</button>
+    {{/if}}
   </nav>
 
   <div class="text-center text-md md:text-lg">
@@ -53,15 +48,15 @@
 
     <ul>
       {{#each @order.tickets as | item |}}
-      <li class="text-2xl md:text-4xl mt-4 font-bold">
+      <li class="text-xl md:text-2xl mt-4 font-bold odd:bg-white even:bg-gray-200">
         {{#if item.ticketTypeConfiguration.mainImageId}}
-        <CloudinaryImage @imageId={{item.ticketTypeConfiguration.mainImageId}} @options={{this.imageOptions}} />
+        <CloudinaryImage @imageId={{item.ticketTypeConfiguration.mainImageId}} @options={{this.imageOptions}} class="inline-block" />
         {{/if}}
         {{item.ticketDetails.quantity}}<span class="text-lg">x</span>
-        {{item.ticketDetails.name}} {{#if item.ticketDetails.displayName}}({{item.ticketDetails.displaName}}){{/if}}
+        {{item.ticketDetails.name}}
 
         {{#if item.ticketDetails.productExtras}}
-        <ul>
+        <ul class="text-lg">
           {{#each item.ticketDetails.productExtras as |extra|}}
           <li>+ {{extra.name}}</li>
           {{/each}}
