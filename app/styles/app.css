@@ -9,8 +9,8 @@
 @import "components/buttons.css";
 
 body {
-  @apply text-gray-800;
-  font-family: 'Open Sans', sans-serif;
+  @apply text-gray-800 subpixel-antialiased;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 table th, table td, table.link-pad td a {
@@ -96,7 +96,7 @@ table.link-pad td {
 }
 
 .tabs .tab a {
-  @apply block p-3 bg-gray-100 text-xs uppercase border-r-1 border-b-1 border-gray-200;
+  @apply block p-3 bg-gray-100 text-sm uppercase border-r-1 border-b-1 border-gray-200;
 }
 
 .tabs .tab a.active {

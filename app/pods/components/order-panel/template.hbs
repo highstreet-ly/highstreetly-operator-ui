@@ -50,13 +50,13 @@
       {{#each @order.tickets as | item |}}
       <li class="text-xl md:text-2xl mt-4 font-bold odd:bg-white even:bg-gray-200">
         {{#if item.ticketTypeConfiguration.mainImageId}}
-        <CloudinaryImage @imageId={{item.ticketTypeConfiguration.mainImageId}} @options={{this.imageOptions}} class="inline-block" />
+        <CloudinaryImage @imageId={{item.ticketTypeConfiguration.mainImageId}} @options={{this.imageOptions}} class="float-right" />
         {{/if}}
         {{item.ticketDetails.quantity}}<span class="text-lg">x</span>
         {{item.ticketDetails.name}}
 
         {{#if item.ticketDetails.productExtras}}
-        <ul class="text-lg">
+        <ul class="text-base font-normal">
           {{#each item.ticketDetails.productExtras as |extra|}}
           <li>+ {{extra.name}}</li>
           {{/each}}

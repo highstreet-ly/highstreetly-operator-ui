@@ -30,7 +30,7 @@ export default class OrdersRoute extends Route {
     if(model.status){
       filter = `expr:and(equals(event-instance-id,'${model.eventInstance.id}'),equals(status,'${model.status}'))`
     }else{
-      filter = `expr:and(equals(event-instance-id,'${model.eventInstance.id}'),not(equals(status,'Pending')),not(equals(status,'Priced')))`
+      filter = `expr:and(equals(event-instance-id,'${model.eventInstance.id}'),not(equals(status,'Pending')),not(equals(status,'Priced')),not(equals(status,'Expired')),not(equals(status,'Refunded')))`
     }
 
     controller.set('orderQuery', {
