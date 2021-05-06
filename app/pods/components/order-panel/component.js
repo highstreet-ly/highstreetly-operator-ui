@@ -13,9 +13,10 @@ export default class OrderPanelComponent extends Component {
       this.loading = false;
     }
 
+    @action
     async setComplete(order) {
       this.loading = true;
-      await order.save({ adapterOptions: { command: "SetOrderComplete" } })
+      await order.save({ adapterOptions: { command: "SetOrderProcessingComplete" } })
       this.loading = false;
     }
 
