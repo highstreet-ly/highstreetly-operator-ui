@@ -1,12 +1,11 @@
 
 {{#if @filtersVisible}}
-  <div class="flex">
-    <div class="flex-grow ">
-      <div class="p-2">
-        <Input @value={{this.filterSearch}} type="text" placeholder="Search" class="text-xs leading-6 py-0 px-2"/>
-        <button type="submit" class="btn btn-primary btn-xs leading-6 py-0 px-2">Search</button>
-        {{this.filterSearch}}
-      </div>
+  <div class="flex lg:w-4/5 m-auto p-2">
+    <div class="flex-grow">
+        <Input @value={{this.filterSearch}} type="text" placeholder="Search for an order number" class="text-lg py-2 px-4 block w-full focus:outline-none"/>
+    </div>
+    <div class="flex-none">
+        <button type="submit" class="btn btn-blue btn-lg">Search</button>
     </div>
   </div>
 {{/if}}
@@ -30,9 +29,9 @@
       <th scope="col" class="py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider table__type" style="width:200px;">
         Type
       </th>
-      <th scope="col" class="py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider table__owner" style="width:200px;">
+      <!--<th scope="col" class="py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider table__owner" style="width:200px;">
         Owned by
-      </th>
+      </th>-->
     </tr>
     </thead>
     <tbody class="bg-white divide-y divide-gray-200 text-sm font-bold">
@@ -50,7 +49,7 @@
 
           <td class="text-xxs table__order font-normal">
 
-          
+
             <LinkTo @route="u.orders.order" @model={{order.id}} class="whitespace-nowrap">
               <ItemsList @items={{order.tickets}} @num="2"/>
             </LinkTo>
@@ -58,7 +57,7 @@
 
           <td class="table__status">
             <LinkTo @route="u.orders.order" @model={{order.id}} class="whitespace-nowrap">
-                    <span class="inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-800 px-2">
+                    <span class="inline-flex text-xs leading-5 font-semibold rounded-full {{if (eq order.status "ProcessingComplete") "bg-green-200" "bg-gray-200 text-gray-800"}} px-2">
                       {{order.status}}
                     </span>
             </LinkTo>
@@ -70,11 +69,11 @@
             </LinkTo>
           </td>
 
-          <td class="uppercase table__owner">
+          <!--<td class="uppercase table__owner break-all">
             <LinkTo @route="u.orders.order" @model={{order.id}}>
               {{order.ownerEmail}}
             </LinkTo>
-          </td>
+          </td>-->
         </tr>
       {{else}}
         {{#if this.loading}}

@@ -30,7 +30,7 @@ export default class OrdersRoute extends Route {
     if(model.status){
       filter = `expr:and(equals(event-instance-id,'${model.eventInstance.id}'),equals(status,'${model.status}'))`
     }else{
-      filter = `expr:equals(event-instance-id,'${model.eventInstance.id}')`
+      filter = `expr:and(equals(event-instance-id,'${model.eventInstance.id}'),not(equals(status,'Pending')),not(equals(status,'Priced')),not(equals(status,'Expired')),not(equals(status,'Refunded')))`
     }
 
     controller.set('orderQuery', {
@@ -39,7 +39,6 @@ export default class OrdersRoute extends Route {
       "fields[order-tickets]":"ticket-details",
       "fields[ticket-details]": 'price,quantity,display-name,name',
       "fields[product-extras]": 'price,name',
-      include: 'tickets.ticket-details.product-extras',
       sort: '-paid-date-time',
       page: {
         'size': 100,
