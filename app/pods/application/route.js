@@ -11,7 +11,7 @@ export default class ApplicationRoute extends Route {
 
   model() {
     if (this.session.isAuthenticated) {
-      this.highstreetlySignalr.initialize(this.currentUser.eventOrganiser.id);
+      this.highstreetlySignalr.initialize(this.currentUser.user.eoid);
     }
   }
 
