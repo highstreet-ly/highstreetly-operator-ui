@@ -6,24 +6,32 @@ export default class HighstreetlySignalrService extends Service {
     @service
     eventBus;
 
-    // @service 
-    // notifications;
+    // @service
+    // audio
+
+    @service
+    notifications;
 
     async initialize(eventOrganiserId) {
+
+        // this.audio.load('sounds/alert.mp3').asSound('alert')
+
         var connection = new signalR.HubConnectionBuilder()
             .withUrl(`${Env.sonatribe.OpsApi}/connection`)
             .build();
 
         connection.on('broadcastMessage', (name, m) => {
-            console.log(`recieved message: ${message}`)
+            console.log(`recieved message: ${m}`)
+           
             var message = JSON.parse(m)
 
             if (message.Status === "order-confirmed") {
-                alert('order confirmed')
-                // this.notifications.success(`New order placed`, { autoClear: true });
+                var audio = new Audio("/sounds/alert.mp3")
+                audio.play()
+                this.notifications.success(`New order placed`, { autoClear: true });
             }
 
-            this.eventBus.publish(message);
+            this.eventBus.publish(message.Status, message);
         });
 
 
