@@ -14,7 +14,13 @@
     </div>
   </div>
   <div class="flex items-center justify-center text-center" style="flex:0 0 50px;" {{action 'toggleFilters'}}>
-    <FaIcon @icon="search" class="text-gray-500" />
+    <a href="#"><FaIcon @icon="search" class="text-gray-500" /></a>
+  </div>
+   <div class="flex items-center justify-center text-center" style="flex:0 0 50px;">
+       <LinkTo @route="u"><FaIcon @icon="home" class="text-gray-500" /></LinkTo>
+  </div>
+  <div class="flex items-center justify-center text-center" style="flex:0 0 50px;" {{action 'signout'}}>
+    <a href="#"><FaIcon @icon="sign-out-alt" class="text-gray-500" /></a>
   </div>
 </div>
 
