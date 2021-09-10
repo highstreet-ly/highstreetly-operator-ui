@@ -37,8 +37,6 @@ export default class HighstreetlyPrinterService extends Service {
         this.message = message
         this.ePosDev = new epson.ePOSDevice();
         this.ePosDev.connect('192.168.192.168', 8008, this.cbConnect.bind(this));
-
-
     }
 
     printInternal(order) {
@@ -48,7 +46,8 @@ export default class HighstreetlyPrinterService extends Service {
         var lineItems = order.tickets.map((ticket) => {
             promises.push(ticket.ticketDetails.then((td) => {
                 return {
-                    name: td.name
+                    name: td.displayName,
+                    quantity: td.quantity,
                 }
             }))
         })
@@ -56,16 +55,17 @@ export default class HighstreetlyPrinterService extends Service {
         Promise.all(promises).then((lineItems) => {
             var li = '';
             lineItems.forEach((lineItem) => {
-                li += `<text>${lineItem.name}&#10;</text>`
+                li += `<text>${lineItem.name} x ${td.quantity}&#10;</text>`
             });
     
             this.printer.setXmlString(`
             <image width="122" height="117" color="color_1" mode="mono">${this.imageData}</image>
+            <feed line="5" />
             <text>Order Id: ${order.humanReadableId}&#10;</text>
             <text>Customer: ${order.ownerName}&#10;</text>
             <text>Order Details:&#10;</text>
             ${li}
-            <feed line="10" />
+            <feed line="5" />
             <cut type="feed"/>
            `)
             this.printer.send();
