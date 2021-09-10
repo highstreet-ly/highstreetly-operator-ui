@@ -23,7 +23,7 @@ export default class OrderModel extends Model {
   @attr('number')
   totalAmount;
 
-  @hasMany('order-ticket')
+  @hasMany('order-ticket', { async: true })
   tickets;
 
   @attr('string')

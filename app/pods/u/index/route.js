@@ -14,5 +14,6 @@ export default class IndexRoute extends Route.extend(AuthenticatedRouteMixin) {
     }
 
     controller.set('organiser', this.currentUser.eventOrganiser);
+
   }
 }
