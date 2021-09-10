@@ -55,7 +55,7 @@ export default class HighstreetlyPrinterService extends Service {
         Promise.all(promises).then((lineItems) => {
             var li = '';
             lineItems.forEach((lineItem) => {
-                li += `<text>${lineItem.name} x ${td.quantity}&#10;</text>`
+                li += `<text>${lineItem.name} x ${lineItem.quantity}&#10;</text>`
             });
     
             this.printer.setXmlString(`
