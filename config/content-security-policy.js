@@ -9,7 +9,7 @@ module.exports = function (environment) {
         // // Allow fonts to be loaded from http://fonts.gstatic.com
         // 'font-src': ["'self'", 'http://fonts.gstatic.com'],
         // // Allow data (xhr/websocket) from api-js.mixpanel.com and custom-api.local
-         'connect-src': ["'self'", 'http://192.168.192.168:8008'],
+         //'connect-src': ["'self'", 'http://192.168.192.168:8008'],
         // // Allow images from the origin itself (i.e. current domain)
         // 'img-src': ["'self'"],
         // // Allow CSS loaded from https://fonts.googleapis.com
