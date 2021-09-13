@@ -19,7 +19,7 @@
           <Input id="password" @type="password" class="text-sm p-6 text-lg border-1 border-gray-400 w-full placeholder-gray-700" placeholder="password" required={{true}} @value={{this.password}} @insert-newline={{action "login"}} />
         </div>
         <div>
-          <button id="login" {{action "login"}} class="w-full p-4 text-center uppercase font-bold" style="background-color:#EF951F;color:#fff;">Sign in</button>
+          <button id="login" {{on 'click' this.login}} class="w-full p-4 text-center uppercase font-bold" style="background-color:#EF951F;color:#fff;">Sign in</button>
         </div>
 
     </form>

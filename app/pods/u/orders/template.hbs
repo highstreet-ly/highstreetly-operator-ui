@@ -13,7 +13,7 @@
       <LinkTo @route="u.orders" @model={{this.eventInstance.id}} @query={{hash status="ProcessingComplete"}}>Complete</LinkTo>
     </div>
   </div>
-  <div class="flex items-center justify-center text-center" style="flex:0 0 50px;" {{action 'toggleFilters'}}>
+  <div class="flex items-center justify-center text-center" style="flex:0 0 50px;" {{on 'click' this.toggleFilters}}>
     <FaIcon @icon="search" class="text-gray-500" />
   </div>
 </div>
@@ -36,8 +36,8 @@
 
         <a href="https://highstreet.ly" title="Highstreet.ly"><img src="/img/logo.png" alt="Highstreet.ly" style="width:60px;" class="mb-3 inline-block"></a>
 
-        {{#if version}}
-            {{version}}
+        {{#if this.version}}
+            {{this.version}}
         {{/if}}
 
       </div>

@@ -10,7 +10,7 @@
 
 body {
   @apply text-gray-800 subpixel-antialiased;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 table th, table td, table.link-pad td a {
