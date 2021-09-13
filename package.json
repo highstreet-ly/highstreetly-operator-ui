@@ -30,6 +30,8 @@
     "autoprefixer": "^10.2.1",
     "babel-eslint": "^8.0.0",
     "broccoli-asset-rev": "^3.0.0",
+    "corber": "1.4.3",
+    "corber-ember-livereload": "^0.0.2",
     "ember-ajax": "^5.0.0",
     "ember-auto-import": "^1.6.0",
     "ember-classic-decorator": "^2.0.0",

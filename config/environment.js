@@ -5,8 +5,8 @@ module.exports = function(environment) {
     modulePrefix: 'highstreetly-operator-ui',
     environment,
     podModulePrefix: 'highstreetly-operator-ui/pods',
-    rootURL: '/',
-    locationType: 'auto',
+    rootURL: '',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
