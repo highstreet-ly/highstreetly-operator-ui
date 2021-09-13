@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import AjaxService from 'ember-ajax/services/ajax';
 import Env from 'highstreetly-operator-ui/config/environment';
+import fetch from 'fetch';
 
 export default class HighstreetlyAjaxService extends AjaxService {
 
@@ -34,12 +35,18 @@ export default class HighstreetlyAjaxService extends AjaxService {
     }
 
     async request(url, options) {
-        return await super.request(url, options).catch((error) => {
+      let response = await fetch(url, {
+        headers: this.headers
+      });
+      let result = await response.json();
+      return result;
+
+        /* return await super.request(url, options).catch((error) => {
             if (error.payload && error.payload === 'Unauthorized') {
                 if (this.get('session.isAuthenticated')) {
                     this.session.invalidate()
                 }
             }
-        });
+        }); */
     }
 }
