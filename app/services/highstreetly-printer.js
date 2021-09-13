@@ -36,7 +36,7 @@ export default class HighstreetlyPrinterService extends Service {
     print(message) {
         this.message = message
         this.ePosDev = new epson.ePOSDevice();
-        this.ePosDev.connect('192.168.192.168', 8008, this.cbConnect.bind(this));
+        this.ePosDev.connect('192.168.192.168', 8043, this.cbConnect.bind(this));
     }
 
     printInternal(order) {
