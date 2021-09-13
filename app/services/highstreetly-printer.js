@@ -14,7 +14,7 @@ export default class HighstreetlyPrinterService extends Service {
             this.ePosDev.createDevice('local_printer', this.ePosDev.DEVICE_TYPE_PRINTER,
                 { 'crypto': false, 'buffer': false }, this.cbCreateDevice_printer.bind(this));
         } else {
-            alert(data);
+           // alert(data);
         }
     }
 
@@ -29,7 +29,7 @@ export default class HighstreetlyPrinterService extends Service {
                     this.printInternal(order);
                 })
         } else {
-            alert(retcode);
+           // alert(retcode);
         }
     }
 
