@@ -1,6 +1,6 @@
 {
   "name": "highstreetly-operator-ui",
-  "version": "0.0.43",
+  "version": "0.0.58",
   "private": true,
   "description": "Small description for highstreetly-operator-ui goes here",
   "repository": "",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@ember/jquery": "^1.1.0",
     "@ember/optional-features": "^2.0.0",
+    "@ember/render-modifiers": "^1.0.2",
     "@fortawesome/ember-fontawesome": "^0.2.2",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fullhuman/postcss-purgecss": "^3.1.3",

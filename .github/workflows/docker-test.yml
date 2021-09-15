@@ -53,7 +53,7 @@ jobs:
         STRIPE_CLIENT_ID: ca_BZCgKyvK7Ywug3UOghG5VHADqYbNRTz9
 
     - name: Build the Docker image sonatribe/highstreet-operator-test
-      run: docker build -t sonatribe/highstreet-operator-test:${{ steps.get_version.outputs.version }} .
+      run: docker build -t sonatribe/highstreet-operator-test:${{ steps.get_version.outputs.version }} --build-arg A_RECORD=${A_RECORD} --build-arg TLD=${TLD} .
     - name: push sonatribe/highstreet-operator-test
       run: docker push sonatribe/highstreet-operator-test:${{ steps.get_version.outputs.version }}
 

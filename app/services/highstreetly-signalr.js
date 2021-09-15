@@ -6,8 +6,8 @@ export default class HighstreetlySignalrService extends Service {
     @service
     eventBus;
 
-    // @service
-    // audio
+    @service
+    highstreetlyPrinter
 
     @service
     notifications;
@@ -22,13 +22,14 @@ export default class HighstreetlySignalrService extends Service {
 
         connection.on('broadcastMessage', (name, m) => {
             console.log(`recieved message: ${m}`)
-           
+
             var message = JSON.parse(m)
 
             if (message.Status === "order-confirmed") {
                 var audio = new Audio("/sounds/alert.mp3")
                 audio.play()
                 this.notifications.success(`New order placed`, { autoClear: true });
+                this.highstreetlyPrinter.print(message)
             }
 
             this.eventBus.publish(message.Status, message);

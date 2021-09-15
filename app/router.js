@@ -14,5 +14,6 @@ Router.map(function() {
       this.route('order', { path:'order/:order_id' });
     });
     this.route('order', { path:'order/:order_id' });
+    this.route('app-settings');
   });
 });
