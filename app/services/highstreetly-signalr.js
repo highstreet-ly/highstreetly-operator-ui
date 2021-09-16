@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import Env from 'highstreetly-operator-ui/config/environment';
 import { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 export default class HighstreetlySignalrService extends Service {
     @service
@@ -12,9 +13,19 @@ export default class HighstreetlySignalrService extends Service {
     @service
     notifications;
 
+
+    @tracked
+    printerSettings
+
     async initialize(eventOrganiserId) {
 
         // this.audio.load('sounds/alert.mp3').asSound('alert')
+
+        let localStorage = window.localStorage
+        this.printerSettings = {
+            port: localStorage.getItem('printer-port'),
+            ip: localStorage.getItem('printer-ip')
+        }
 
         var connection = new signalR.HubConnectionBuilder()
             .withUrl(`${Env.sonatribe.OpsApi}/connection`)
@@ -29,7 +40,10 @@ export default class HighstreetlySignalrService extends Service {
                 var audio = new Audio("/sounds/alert.mp3")
                 audio.play()
                 this.notifications.success(`New order placed`, { autoClear: true });
-                this.highstreetlyPrinter.print(message)
+                
+                if(this.printerSettings.port && this.printerSettings.ip){
+                    this.highstreetlyPrinter.print(message)
+                }
             }
 
             this.eventBus.publish(message.Status, message);
