@@ -2,6 +2,7 @@ import Service from '@ember/service';
 import Env from 'highstreetly-operator-ui/config/environment';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import signalR from "@microsoft/signalr";
 
 export default class HighstreetlySignalrService extends Service {
     @service
