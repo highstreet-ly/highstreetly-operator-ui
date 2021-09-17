@@ -9,6 +9,8 @@ export default class HighstreetlyPrinterService extends Service {
 
     printer
     ePosDev
+    onPrintingStarted
+    onPrintingFinished
 
     cbConnect(data) {
         if (data == 'OK' || data == 'SSL_CONNECT_OK') {
@@ -43,6 +45,9 @@ export default class HighstreetlyPrinterService extends Service {
     }
 
     printTest() {
+        if(this.onPrintingStarted){
+            this.onPrintingStarted()
+        }
         this.testMode = true
         this.ePosDev = new epson.ePOSDevice();
         let localStorage = window.localStorage
@@ -55,6 +60,9 @@ export default class HighstreetlyPrinterService extends Service {
     }
 
     print(message) {
+        if(this.onPrintingStarted){
+            this.onPrintingStarted()
+        }
         this.testMode = false
         this.message = message
         this.ePosDev = new epson.ePOSDevice();
@@ -67,7 +75,7 @@ export default class HighstreetlyPrinterService extends Service {
         this.ePosDev.connect(settings.ip, settings.port, this.cbConnect.bind(this));
     }
 
-    printTestInternal(){
+    printTestInternal() {
 
         this.printer.setXmlString(`
         <feed line="3"/>
@@ -79,7 +87,7 @@ export default class HighstreetlyPrinterService extends Service {
         <text reverse="false" ul="true" em="false" color="color_1"/>
         <text width="1" height="1"/>
         <feed line="2"/>
-        <text>New Order Placed ${moment (new Date()).format('DD-MM-YYYY')} @${moment (new Date()).format('HH:mm')}</text>
+        <text>New Order Placed ${moment(new Date()).format('DD-MM-YYYY')} @${moment(new Date()).format('HH:mm')}</text>
         <feed line="2"/>
         <text align="left"/>
         <text reverse="false" ul="false" em="false" color="color_1"/>
@@ -100,6 +108,10 @@ export default class HighstreetlyPrinterService extends Service {
         <cut type="feed"/>
        `)
         this.printer.send();
+
+        if(this.onPrintingFinished){
+            this.onPrintingFinished()
+        }
 
     }
 
@@ -135,7 +147,7 @@ export default class HighstreetlyPrinterService extends Service {
             <text reverse="false" ul="true" em="false" color="color_1"/>
             <text width="1" height="1"/>
             <feed line="2"/>
-            <text>New Order Placed ${moment (order.confirmedOn).format('DD-MM-YYYY')} @${moment (order.confirmedOn).format('HH:mm')}</text>
+            <text>New Order Placed ${moment(order.confirmedOn).format('DD-MM-YYYY')} @${moment(order.confirmedOn).format('HH:mm')}</text>
             <feed line="2"/>
             <text align="left"/>
             <text reverse="false" ul="false" em="false" color="color_1"/>
@@ -150,12 +162,16 @@ export default class HighstreetlyPrinterService extends Service {
             <cut type="feed"/>
            `)
             this.printer.send();
+
+            if(this.onPrintingFinished){
+                this.onPrintingFinished()
+            }
         })
 
 
     }
 
-   imageData = "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"
+    imageData = "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"
 }
 
 

@@ -11,6 +11,15 @@
     {{#if (or (eq @order.status 'Paid') (eq @order.status 'Processing'))}}
       <button {{action "refund" this.order}} href="#" class="btn btn-red my-2">Refund</button>
     {{/if}}
+    {{#if this.printerConfigured}}
+     <button {{action "reprint" this.order}} href="#" class="btn btn-red my-2">
+       {{#if printing}}
+       Printing, please wait...
+       {{else}}
+       Re-Print
+       {{/if}}
+     </button>
+     {{/if}}
   </nav>
 
   <div class="text-center text-md md:text-lg">

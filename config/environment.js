@@ -7,6 +7,9 @@ module.exports = function(environment) {
     podModulePrefix: 'highstreetly-operator-ui/pods',
     rootURL: '/',
     locationType: 'auto',
+    moment: {
+      outputFormat : 'YYYY-MM-DD HH:mm:ssZ'
+    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
