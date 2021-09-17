@@ -37,8 +37,7 @@
                             <label for="port">
                                 Port
                             </label>
-                            <Input @value={{this.port}} id="port" class="form-control" maxlength="15"
-                                placeholder="xxx.xxx.xxx.xxx" />
+                            <Input @value={{this.port}} id="port" class="form-control" maxlength="15" />
                         </div>
                     </div>
                 </div>
@@ -50,4 +49,10 @@
 <button id="save-product" type="button" class="btn btn-success" {{on "click" (fn this.save)}}>
     {{fa-icon "save"}}
     Save Changes
+</button>
+
+
+<button id="save-product" type="button" class="btn btn-success" {{on "click" (fn this.test)}}>
+    {{fa-icon "save"}}
+    Print test
 </button>
