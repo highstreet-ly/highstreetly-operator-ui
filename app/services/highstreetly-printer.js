@@ -19,11 +19,14 @@ export default class HighstreetlyPrinterService extends Service {
     }
 
     cbCreateDevice_printer(devobj, retcode) {
+
+        this.printer = devobj;
+        this.printer.timeout = 60000;
+        this.printer.onreceive = function (res) { console.log(res.success); };
+        this.printer.oncoveropen = function () { console.log('coveropen'); };
+
         if (retcode == 'OK') {
-            this.printer = devobj;
-            this.printer.timeout = 60000;
-            this.printer.onreceive = function (res) { alert(res.success); };
-            this.printer.oncoveropen = function () { alert('coveropen'); };
+
             this.store.findRecord('order', this.message.OrderId, { include: 'tickets,tickets.ticket-details,tickets.ticket-details.product-extras' })
                 .then((order) => {
                     this.printInternal(order);

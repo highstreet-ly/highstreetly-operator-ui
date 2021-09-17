@@ -22,6 +22,6 @@ export default class OrderPanelComponent extends Component {
 
     @action
     refund() {
-        alert();
+        
     }
 }
