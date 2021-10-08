@@ -30,7 +30,7 @@ export default class OrdersRoute extends Route.extend(AuthenticatedRouteMixin) {
     if(model.status){
       filter = `expr:and(equals(event-instance-id,'${model.eventInstance.id}'),equals(status,'${model.status}'))`
     }else{
-      filter = `expr:and(equals(event-instance-id,'${model.eventInstance.id}'),not(equals(status,'Pending')),not(equals(status,'Priced')),not(equals(status,'Expired'))))`
+      filter = `expr:and(equals(event-instance-id,'${model.eventInstance.id}'),not(equals(status,'Pending')),not(equals(status,'Priced')),not(equals(status,'Expired')))`
     }
 
     controller.set('orderQuery', {
