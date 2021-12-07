@@ -10,6 +10,9 @@ export default class OrderPanelComponent extends Component {
   @service
   highstreetlyPrinter
 
+  @service
+  eventBus;
+
   @tracked
   printerConfigured = false
 
@@ -43,6 +46,8 @@ export default class OrderPanelComponent extends Component {
   async setProcessing(order) {
     this.loading = true;
     await order.save({ adapterOptions: { command: "SetOrderProcessing" } })
+    order.set('status', 'Processing')
+    this.eventBus.publish('SetOrderProcessing', order.id)
     this.loading = false;
   }
 
@@ -50,6 +55,7 @@ export default class OrderPanelComponent extends Component {
   async setComplete(order) {
     this.loading = true;
     await order.save({ adapterOptions: { command: "SetOrderProcessingComplete" } })
+    this.eventBus.publish('SetOrderProcessingComplete', order.id)
     this.loading = false;
   }
 
@@ -58,10 +64,5 @@ export default class OrderPanelComponent extends Component {
     let message = { OrderId: this.args.order.id }
 
     this.highstreetlyPrinter.print(message)
-  }
-
-  @action
-  refund() {
-
   }
 }

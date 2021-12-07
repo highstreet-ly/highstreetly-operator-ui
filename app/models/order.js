@@ -55,6 +55,9 @@ export default class OrderModel extends Model {
   @attr('boolean')
   isNationalDelivery;
 
+  @attr('boolean')
+  isToTable;
+
   @attr('date')
   refundedDate;
 
@@ -79,6 +82,14 @@ export default class OrderModel extends Model {
   @attr('string')
   customerDispatchAdvisory;
 
+  @attr('string')
+  customerDispatchAdvisory;
+
+  @attr('string')
+  tableInfo;
+
+
+
   get totalAmountFormatted() {
     return this.totalAmount.toFixed(2);
   }
@@ -90,7 +101,10 @@ export default class OrderModel extends Model {
       return 'Local delivery';
     } else if (this.isNationalDelivery) {
       return 'National delivery'
-    } else {
+    } else if (this.isToTable){
+      return `Deliver to table ${this.tableInfo}`
+    }
+    else {
       return 'Unknown';
     }
   }

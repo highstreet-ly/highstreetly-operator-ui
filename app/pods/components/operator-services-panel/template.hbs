@@ -1,64 +1,104 @@
 <div class="flex flex-col">
   <div class="shadow overflow-hidden border-b border-gray-200">
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="bg-gray-50">
-        <tr>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-            Business
-          </th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 
-          </th>
-          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-            Status
-          </th>
-          <th scope="col" class="relative px-6 py-3">
-            <span class="sr-only">Options</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-200">
+    {{#if @loading}}
+      <ComponentLoading />
+    {{else}}
 
-        {{#each @organiser.eventSeries as |series|}}
-        {{#each series.eventInstances as |event|}}
-        <tr>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="flex items-center">
-              <div class="flex-shrink-0 h-10 w-10">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Business
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
 
-                <CloudinaryImage @imageId={{event.mainImageId}} @options="h_100,g_center"
-                  class="h-10 w-10 rounded-full" />
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Status
+            </th>
+            <th scope="col" class="relative px-6 py-3">
+              <span class="sr-only">Options</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
 
-              </div>
-              <div class="ml-4">
-                <div class="text-sm font-medium text-gray-900">
-                  {{event.name}}
-                </div>
-                <!--<div class="text-sm text-gray-500">
+          {{#each @organiser.eventSeries as |series|}}
+            {{#each series.eventInstances as |event|}}
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="flex-shrink-0 h-10 w-10">
+
+                      <CloudinaryImage
+                        @imageId={{event.mainImageId}}
+                        @options="h_100,g_center"
+                        class="h-10 w-10 rounded-full"
+                      />
+
+                    </div>
+                    <div class="ml-4">
+                      <div class="text-sm font-medium text-gray-900">
+                        {{event.name}}
+                      </div>
+                      <!--<div class="text-sm text-gray-500">
                   jane.cooper@example.com
                 </div>-->
-              </div>
-            </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm text-gray-900"><b>12</b> orders ready to process</div>
-            <div class="text-sm text-gray-900"><b>3</b> orders ready to ship</div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <span
-              class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{if event.isPublished 'bg-green-100 text-green-800' 'bg-red-100 text-red-800' }}">
-              {{if event.isPublished 'Enabled' 'Disabled' }}
-            </span>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-            <LinkTo @route="u.orders.index" @model={{event.id}} class="btn btn-blue btn-xs">View Orders</LinkTo>
-          </td>
-        </tr>
-        {{/each}}
-        {{/each}}
-        <!-- More rows... -->
-      </tbody>
-    </table>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm text-gray-900"><b
+                    >{{event.readyToProcessCount}}</b>
+                    orders ready to process</div>
+                  <div class="text-sm text-gray-900"><b
+                    >{{event.processingCount}}</b>
+                    orders being processed</div>
+                  <div class="text-sm text-gray-900"><b
+                    >{{event.processingCompleteCount}}</b>
+                    orders complete</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span
+                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                      {{if
+                        event.isPublished
+                        "bg-green-100 text-green-800"
+                        "bg-red-100 text-red-800"
+                      }}"
+                  >
+                    {{if event.isPublished "Enabled" "Disabled"}}
+                  </span>
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                >
+                  <LinkTo
+                    @route="u.orders.index"
+                    @model={{event.id}}
+                    @query={{hash status="Paid" }}
+                    class="btn btn-blue btn-xs"
+                  >View Orders</LinkTo>
+                </td>
+              </tr>
+            {{/each}}
+          {{/each}}
+
+          <!-- More rows... -->
+        </tbody>
+      </table>
+
+    {{/if}}
   </div>
 </div>
 

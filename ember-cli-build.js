@@ -3,15 +3,15 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const isProduction = EmberApp.env() === 'production';
 
-/*const exec = require('child_process').exec;
-exec('sh ssl/get-certs.sh',
-  (error, stdout, stderr) => {
-    console.log(stdout);
-    console.log(stderr);
-    if (error !== null) {
-      console.log(`exec error: ${error}`);
-    }
-  });*/
+// const exec = require('child_process').exec;
+// exec('sh ssl/get-certs.sh',
+//   (error, stdout, stderr) => {
+//     console.log(stdout);
+//     console.log(stderr);
+//     if (error !== null) {
+//       console.log(`exec error: ${error}`);
+//     }
+//   });
 
 const purgeCSS = {
   module: require('@fullhuman/postcss-purgecss'),

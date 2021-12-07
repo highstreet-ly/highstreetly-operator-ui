@@ -1,8 +1,8 @@
 <div class="flex">
   <div class="flex flex-1 text-center tabs shadow">
-    <div class="flex-1 tab">
+    {{!-- <div class="flex-1 tab">
       <LinkTo @route="u.orders" @model={{this.eventInstance.id}} @query={{hash status=null}}>All orders</LinkTo>
-    </div>
+    </div> --}}
     <div class="flex-1 tab">
       <LinkTo @route="u.orders" @model={{this.eventInstance.id}} @query={{hash status="Paid" }}>Ready to start</LinkTo>
     </div>
@@ -20,11 +20,14 @@
       <FaIcon @icon="search" class="text-gray-500" />
     </a>
   </div>
+  {{#if this.currentUser.isAdmin}}
   <div class="flex items-center justify-center text-center" style="flex:0 0 50px;">
     <LinkTo @route="u.app-settings">
       <FaIcon @icon="cog" class="text-gray-500" />
     </LinkTo>
   </div>
+  {{/if}}
+
   <div class="flex items-center justify-center text-center" style="flex:0 0 50px;">
     <LinkTo @route="u">
       <FaIcon @icon="home" class="text-gray-500" />

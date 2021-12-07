@@ -48,6 +48,13 @@ export default class OrdersPanel extends Component {
       this.set("pageSize", 10);
     }
 
+    this.eventBus.subscribe("SetOrderProcessing", this, this.handleUpdate);
+    this.eventBus.subscribe(
+      "SetOrderProcessingComplete",
+      this,
+      this.handleUpdate
+    );
+
     if (!isEmpty(this.commandType)) {
       this.commandType
         .split(",")
@@ -60,6 +67,8 @@ export default class OrdersPanel extends Component {
   }
 
   willDestroyElement() {
+    this.eventBus.unsubscribe('SetOrderProcessing', this, this.handleUpdate)
+    this.eventBus.unsubscribe('SetOrderProcessingComplete', this, this.handleUpdate)
     try {
       this.commandType
         .split(",")
